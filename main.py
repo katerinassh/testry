@@ -4,6 +4,8 @@ from create_test import Form2
 from edit_test import Form3
 from delete_test import Form4
 import sys
+import test
+import os
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -11,6 +13,8 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.current_test = None
+        self.feedback = None
 
         self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
         self.radioButton = self.findChild(QtWidgets.QRadioButton, 'radioButton')
@@ -55,22 +59,29 @@ class CreateWindow(QtWidgets.QMainWindow):
         super(CreateWindow, self).__init__()
         self.ui = Form2()
         self.ui.setupUi(self)
+        self.current_test = None
+        self.feedback = None
         self.title = title
 
         self.textEdit_2 = self.findChild(QtWidgets.QTextEdit, 'textEdit_2')
         self.textEdit_2.append(title)
+        self.textEdit = self.findChild(QtWidgets.QTextEdit, 'textEdit')
 
         self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
         self.pushButton_2.clicked.connect(self.window1)
         self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
-        self.pushButton_3.clicked.connect(self.window3)
+        self.pushButton_3.clicked.connect(self.create_new_test)
 
     def window1(self):
         self.w1 = MainWindow()
         self.w1.show()
         self.hide()
 
-    def window3(self):
+    def create_new_test(self): # создаётся новый тест, открывается окно для редактирования
+        self.current_test = test.Test(self.textEdit_2.toPlainText(), self.textEdit.toPlainText())
+        self.current_test.workTestFile()
+        self.current_test.createAnswerFile()
+
         self.w3 = EditWindow(self.title)
         self.w3.show()
         self.hide()
@@ -116,6 +127,8 @@ class DeleteWindow(QtWidgets.QMainWindow):
         self.pushButton_4.clicked.connect(self.close)
 
     def delete(self): # удаляет тест
+        os.remove('{}.txt'.format(self.title))
+        os.remove('{}_answers.txt'.format(self.title))
         self.label_3.setText('Deleted!')
 
 
