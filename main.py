@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets
 from creator import Ui_MainWindow
 from create_test import Form2
+from edit_test import Form3
+from delete_test import Form4
 import sys
 
 
@@ -23,6 +25,10 @@ class MainWindow(QtWidgets.QMainWindow):
     def pushButton_2_clicked(self):
         if self.radioButton.isChecked():
             self.pushButton_2.clicked.connect(self.window2)
+        elif self.radioButton_3.isChecked():
+            self.pushButton_2.clicked.connect(self.window3)
+        elif self.radioButton_2.isChecked():
+            self.pushButton_2.clicked.connect(self.window4)
 
     def main_window(self):
         self.ui = Ui_MainWindow()
@@ -30,9 +36,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.show()
 
     def window2(self):
-        self.w = CreateWindow(self.lineEdit.text())
-        self.w.show()
+        self.w2 = CreateWindow(self.lineEdit.text())
+        self.w2.show()
         self.hide()
+
+    def window3(self):
+        self.w3 = EditWindow(self.lineEdit.text())
+        self.w3.show()
+        self.hide()
+
+    def window4(self):
+        self.w4 = DeleteWindow(self.lineEdit.text())
+        self.w4.show()
 
 
 class CreateWindow(QtWidgets.QMainWindow):
@@ -40,10 +55,68 @@ class CreateWindow(QtWidgets.QMainWindow):
         super(CreateWindow, self).__init__()
         self.ui = Form2()
         self.ui.setupUi(self)
+        self.title = title
 
         self.textEdit_2 = self.findChild(QtWidgets.QTextEdit, 'textEdit_2')
         self.textEdit_2.append(title)
 
+        self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
+        self.pushButton_2.clicked.connect(self.window1)
+        self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
+        self.pushButton_3.clicked.connect(self.window3)
+
+    def window1(self):
+        self.w1 = MainWindow()
+        self.w1.show()
+        self.hide()
+
+    def window3(self):
+        self.w3 = EditWindow(self.title)
+        self.w3.show()
+        self.hide()
+
+
+class EditWindow(QtWidgets.QMainWindow):
+    def __init__(self, title):
+        super(EditWindow, self).__init__()
+        self.ui = Form3()
+        self.ui.setupUi(self)
+        self.title = title
+
+        self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
+        self.label_2.setText(self.title)
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.window1)
+        self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
+        self.pushButton_5.clicked.connect(self.window4)
+
+    def window1(self):
+        self.w1 = MainWindow()
+        self.w1.show()
+        self.hide()
+
+    def window4(self):
+        self.w4 = DeleteWindow(self.title)
+        self.w4.show()
+
+
+class DeleteWindow(QtWidgets.QMainWindow):
+    def __init__(self, title):
+        super(DeleteWindow, self).__init__()
+        self.ui = Form4()
+        self.ui.setupUi(self)
+        self.title = title
+
+        self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
+        self.label_2.setText(self.title)
+        self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+        self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
+        self.pushButton_3.clicked.connect(self.delete)
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.close)
+
+    def delete(self): # удаляет тест
+        self.label_3.setText('Deleted!')
 
 
 app = QtWidgets.QApplication([])

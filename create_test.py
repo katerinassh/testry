@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Form2(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        Form.setObjectName("Create new test")
         Form.resize(600, 400)
         Form.setStyleSheet("background-color: rgb(246, 247, 250);\n"
 "color: rgb(139, 140, 166);\n"
@@ -85,7 +85,7 @@ class Form2(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Create new test"))
         self.label.setText(_translate("Form", "Test title"))
         self.label_2.setText(_translate("Form", "Description"))
         self.label_3.setText(_translate("Form", "Before adding questions you must create a test first"))
