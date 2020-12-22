@@ -94,6 +94,7 @@ class Ui_MainWindow(object):
         self.radioButton_4.setFont(font)
         self.radioButton_4.setStyleSheet("color: rgb(255, 255, 255)")
         self.radioButton_4.setObjectName("radioButton_4")
+
         self.pushButton_2 = QtWidgets.QPushButton(self.frame_2)
         self.pushButton_2.setGeometry(QtCore.QRect(290, 190, 151, 41))
         font = QtGui.QFont()
