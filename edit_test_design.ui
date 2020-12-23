@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,8 +22,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>601</width>
-     <height>401</height>
+     <width>800</width>
+     <height>600</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -65,8 +65,8 @@ color: rgb(110, 55, 238);</string>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>80</y>
+      <x>565</x>
+      <y>130</y>
       <width>200</width>
       <height>50</height>
      </rect>
@@ -89,8 +89,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>170</y>
+      <x>565</x>
+      <y>270</y>
       <width>200</width>
       <height>50</height>
      </rect>
@@ -113,8 +113,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>260</y>
+      <x>565</x>
+      <y>415</y>
       <width>200</width>
       <height>50</height>
      </rect>
@@ -137,8 +137,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>340</y>
+      <x>60</x>
+      <y>540</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -161,8 +161,8 @@ background-color: rgb(139, 149, 166);</string>
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>340</y>
+      <x>325</x>
+      <y>540</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -209,6 +209,40 @@ color:  rgb(139, 149, 166);</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>500</width>
+      <height>450</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <kerning>false</kerning>
+     </font>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+padding: 10px</string>
+    </property>
+    <property name="lineWidth">
+     <number>4</number>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
