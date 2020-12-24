@@ -135,12 +135,25 @@ class EditWindow(QtWidgets.QMainWindow):
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window4)
         self.loadFile()
+        self.open()
+        #self.upd_feedback()
 
     def loadFile(self): # загружает на форму тест из файла
         file = open('{}.txt'.format(self.title), 'r')
         with file:
             data = file.read()
         self.label_3.setText(data)
+
+    def open(self): # открывает тест
+        file = open('{}.txt'.format(self.title), 'r')
+        title = file.readline().strip('\n')
+        description = file.readline().strip('\n')
+        _ = file.readline()
+        self.current_test = test.Test(title, description)
+        #self.current_test.readFromFile(file)
+
+   # def upd_feedback(self):
+    #    self.feedback = feedback.Feedback(self.current_test.title, len(self.current_test.questions))
 
     def window1(self):
         self.w1 = MainWindow()
