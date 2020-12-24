@@ -165,15 +165,15 @@ class EditWindow(QtWidgets.QMainWindow):
         self.w4.show()
 
     def selectQstAdd(self):
-        self.wAdd = interaction_with_questions.AddQuestion(self.title)
+        self.wAdd = interaction_with_questions.AddQuestion(self.title, self.current_test)
         self.wAdd.show()
 
     def selectQstEdit(self):
-        self.wEdit = interaction_with_questions.EditQuestion(self.title)
+        self.wEdit = interaction_with_questions.EditQuestion(self.title, self.current_test)
         self.wEdit.show()
 
     def selectQstDelete(self):
-        self.wDelete = interaction_with_questions.DeleteQuestion(self.title)
+        self.wDelete = interaction_with_questions.DeleteQuestion(self.title, self.current_test)
         self.wDelete.show()
 
 

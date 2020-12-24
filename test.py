@@ -47,20 +47,20 @@ class Test:   # клас менеджер-тест, взаємодія і з а�
         self.qamount += 1
         if type == 'QstName':
             qst = types_of_questions.QstName()
-        if type == 'QstTrueFalse':
+        elif type == 'Text answer':
             qst = types_of_questions.QstTrueFalse()
-        if type == 'QstEnterText':
+        elif type == 'True/False':
             qst = types_of_questions.QstEnterText()
-        if type == 'QstOneAnswer':
+        elif type == 'With answer options':
             qst = types_of_questions.QstOneAnswer()
-        if type == 'QstSomeAnswer':
+        elif type == 'Flags':
             qst = types_of_questions.QstSomeAnswer()
-        if type == 'QstTable':
-            qst = types_of_questions.QstTable()
-        if type == 'QstScale':
+        elif type == 'Linear Scale':
             qst = types_of_questions.QstScale()
-        if type == 'QstTableOne':
+        elif type == 'Table with answer options':
             qst = types_of_questions.QstTableOne()
+        elif type == 'Grid of flags':
+            qst = types_of_questions.QstTable()
         qst.add()
         self.questions.append(qst)
 

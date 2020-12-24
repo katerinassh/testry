@@ -6,55 +6,35 @@ from delete_question_design import Form7
 
 
 class AddQuestion(QtWidgets.QMainWindow): # окно для выбора типа вопроса
-    def __init__(self, title):
+    def __init__(self, test):
         super(AddQuestion, self).__init__()
         self.ui = Form5()
         self.ui.setupUi(self)
-        self.title = title
-        self.questions = []
-        self.qamount = 0
-        self.ftest = None
-        self.add('QstName')
+        self.current_test = test
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
         self.comboBox = self.findChild(QtWidgets.QComboBox, 'comboBox')
-        #self.comboBox.currentText()
-
-    def add(self, type):  # метод додає нове питання у тест
-        self.qamount += 1
-       # if type == 'QstName':
-       #     qst = types_of_questions.QstName()
-       #if type == 'QstTrueFalse':
-        #    qst = types_of_questions.QstTrueFalse()
-       # if type == 'QstEnterText':
-       #    qst = types_of_questions.QstEnterText()
-      #  if type == 'QstOneAnswer':
-        #    qst = types_of_questions.QstOneAnswer()
-       # if type == 'QstSomeAnswer':
-       #    qst = types_of_questions.QstSomeAnswer()
-      #  if type == 'QstTable':
-        #    qst = types_of_questions.QstTable()
-      #  if type == 'QstScale':
-       #     qst = types_of_questions.QstScale()
-      #  if type == 'QstTableOne':
-       #     qst = types_of_questions.QstTableOne()
-       # qst.add()
-       # self.questions.append(qst)
+        self.current_test.add(str(self.comboBox.currentText()))
 
 
 class EditQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для редактирования
-    def __init__(self, title):
+    def __init__(self, test):
         super(EditQuestion, self).__init__()
         self.ui = Form6()
         self.ui.setupUi(self)
+        self.current_test = test
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.comboBox = self.findChild(QtWidgets.QComboBox, 'comboBox')
+        for i in range(1, len(self.current_test.questions)):
+            self.comboBox.addItem(str(i) + " - " + self.current_test.questions[i]._question)
 
 
 class DeleteQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для удаления
-    def __init__(self, title):
+    def __init__(self, test):
         super(DeleteQuestion, self).__init__()
         self.ui = Form6()
         self.ui.setupUi(self)
+        self.current_test = test
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
