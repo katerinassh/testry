@@ -2,12 +2,13 @@ from PyQt5 import QtWidgets
 from creator_design import Ui_MainWindow
 from create_test_design import Form2
 from edit_test_design import Form3
+from delete_test_design import Form4
+import interaction_with_questions
 
-import delete_test
 import warnings
 import test
 import sys
-
+import os
 
 
 class MainWindow(QtWidgets.QMainWindow): # главный экран программы
@@ -31,22 +32,19 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
 
     def pushButton_2_clicked(self): # выбор действия с creator mode
         if self.radioButton.isChecked():
-            self.pushButton_2.clicked.connect(self.window2)
+            self.window2()
 
         elif self.radioButton_3.isChecked():
             if self.lineEdit.text() == '':
                 self.warning1()
             else:
-                self.pushButton_2.clicked.connect(self.window3)
+                self.window3()
 
         elif self.radioButton_2.isChecked():
             if self.lineEdit.text() == '':
                 self.warning1()
             else:
-                self.pushButton_2.clicked.connect(self.window4)
-
-    def push_error(self):
-        self.warning2()
+                self.window4()
 
     def main_window(self):
         self.ui = Ui_MainWindow()
@@ -66,7 +64,7 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
         self.hide()
 
     def window4(self): # показывает окно для удаления теста
-        self.w4 = delete_test.DeleteWindow(self.lineEdit.text())
+        self.w4 = DeleteWindow(self.lineEdit.text())
         if FileNotFoundError:
             self.warning2()
         self.w4.show()
@@ -90,7 +88,7 @@ class CreateWindow(QtWidgets.QMainWindow):
         self.title = title
 
         self.textEdit_2 = self.findChild(QtWidgets.QTextEdit, 'textEdit_2')
-        self.textEdit_2.append(title)
+        self.textEdit_2.append(self.title)
         self.textEdit = self.findChild(QtWidgets.QTextEdit, 'textEdit')
 
         self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
@@ -104,7 +102,8 @@ class CreateWindow(QtWidgets.QMainWindow):
         self.hide()
 
     def create_new_test(self): # создаётся новый тест, открывается окно для редактирования
-        self.current_test = test.Test(self.textEdit_2.toPlainText(), self.textEdit.toPlainText())
+        self.title = self.textEdit_2.toPlainText()
+        self.current_test = test.Test(self.title, self.textEdit.toPlainText())
         self.current_test.workTestFile()
         self.current_test.createAnswerFile()
 
@@ -125,6 +124,10 @@ class EditWindow(QtWidgets.QMainWindow):
         self.label_2.setText(self.title)
         self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
 
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.selectQst)
+        self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
+        self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
         self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
         self.pushButton_4.clicked.connect(self.window1)
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
@@ -143,9 +146,38 @@ class EditWindow(QtWidgets.QMainWindow):
         self.hide()
 
     def window4(self):
-        self.w4 = delete_test.DeleteWindow(self.title)
+        self.w4 = DeleteWindow(self.title)
         self.w4.show()
 
+    def selectQst(self):
+        self.wQst = interaction_with_questions.AddQuestion()
+        self.wQst.show()
+
+
+class DeleteWindow(QtWidgets.QMainWindow):
+    def __init__(self, title):
+        super(DeleteWindow, self).__init__()
+        self.ui = Form4()
+        self.ui.setupUi(self)
+        self.title = title
+
+        self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
+        self.label_2.setText(self.title)
+        self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+        self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
+        self.pushButton_3.clicked.connect(self.delete)
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.window1)
+
+    def window1(self):
+        self.w1 = MainWindow()
+        self.w1.show()
+        self.hide()
+
+    def delete(self): # удаляет тест
+        os.remove('{}.txt'.format(self.title))
+        os.remove('{}_answers.txt'.format(self.title))
+        self.label_3.setText('Deleted!')
 
 
 app = QtWidgets.QApplication([])

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'delete_test.ui'
+# Form implementation generated from reading ui file 'delete_test_design.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Form4(object):
     def setupUi(self, Form4):
-        Form4.setObjectName("Delete the test!")
+        Form4.setObjectName("Delete the test")
         Form4.resize(450, 200)
         self.frame = QtWidgets.QFrame(Form4)
         self.frame.setGeometry(QtCore.QRect(0, 0, 451, 201))
@@ -70,8 +70,8 @@ class Form4(object):
 
     def retranslateUi(self, Form4):
         _translate = QtCore.QCoreApplication.translate
-        Form4.setWindowTitle(_translate("Form4", "Delete the test!"))
+        Form4.setWindowTitle(_translate("Form4", "Delete the test"))
         self.label.setText(_translate("Form4", "<strong>Are you sure that you want to delete this test?</strong"))
         self.label_2.setText(_translate("Form4", "name of the test"))
         self.pushButton_3.setText(_translate("Form4", "YES"))
-        self.pushButton_4.setText(_translate("Form4", "No"))
+        self.pushButton_4.setText(_translate("Form4", "BACK"))
