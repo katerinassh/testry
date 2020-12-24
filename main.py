@@ -125,9 +125,11 @@ class EditWindow(QtWidgets.QMainWindow):
         self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
-        self.pushButton.clicked.connect(self.selectQst)
+        self.pushButton.clicked.connect(self.selectQstAdd)
         self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
+        self.pushButton_2.clicked.connect(self.selectQstEdit)
         self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
+        self.pushButton_3.clicked.connect(self.selectQstDelete)
         self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
         self.pushButton_4.clicked.connect(self.window1)
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
@@ -149,9 +151,17 @@ class EditWindow(QtWidgets.QMainWindow):
         self.w4 = DeleteWindow(self.title)
         self.w4.show()
 
-    def selectQst(self):
-        self.wQst = interaction_with_questions.AddQuestion()
-        self.wQst.show()
+    def selectQstAdd(self):
+        self.wAdd = interaction_with_questions.AddQuestion(self.title)
+        self.wAdd.show()
+
+    def selectQstEdit(self):
+        self.wEdit = interaction_with_questions.EditQuestion(self.title)
+        self.wEdit.show()
+
+    def selectQstDelete(self):
+        self.wDelete = interaction_with_questions.DeleteQuestion(self.title)
+        self.wDelete.show()
 
 
 class DeleteWindow(QtWidgets.QMainWindow):

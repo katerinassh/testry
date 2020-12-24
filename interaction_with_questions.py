@@ -1,5 +1,7 @@
 from PyQt5 import QtWidgets
 from add1_design import Form5
+from edit_question_design import Form6
+from delete_question_design import Form7
 
 
 
@@ -38,3 +40,21 @@ class AddQuestion(QtWidgets.QMainWindow): # окно для выбора тип�
        #     qst = types_of_questions.QstTableOne()
        # qst.add()
        # self.questions.append(qst)
+
+
+class EditQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для редактирования
+    def __init__(self, title):
+        super(EditQuestion, self).__init__()
+        self.ui = Form6()
+        self.ui.setupUi(self)
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+
+
+class DeleteQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для удаления
+    def __init__(self, title):
+        super(DeleteQuestion, self).__init__()
+        self.ui = Form6()
+        self.ui.setupUi(self)
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
