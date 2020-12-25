@@ -1,0 +1,65 @@
+Kate`s testing
+
+Katerina
+1
+['2, 3', '2, 3, 4', '3']
+2.467532467532467
+2
+2002
+1.0
+3
+Kyiv, Toronto
+1.0
+4
+My favourite holiday is Christmas
+0
+
+4.467532467532466
+
+Timur
+1
+['0', '0', '0']
+0
+2
+1997
+0
+3
+Lviv
+0
+4
+My favourite holiday is Christmas
+0
+
+0.0
+
+Emily
+1
+['2, 3', '1, 2, 3, 4', '3, 4']
+3.519480519480518
+2
+2001
+0
+3
+Kyiv, London
+2.0
+4
+My favourite holiday is Christmas
+0
+
+5.519480519480518
+
+Peter
+1
+['2', '1', '3, 4']
+1.483766233766234
+2
+2002
+1.0
+3
+Lviv, London, Toronto
+1.0
+4
+My favourite holiday is Christmas
+0
+
+3.483766233766234

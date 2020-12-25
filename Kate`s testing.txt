@@ -1,0 +1,45 @@
+Kate`s testing
+I want to test this program
+
+QstTable
+Who is whose friend?
+3
+Lera`s friends...
+Vova`s friends...
+Kate`s friends...
+4
+Tim
+Kate
+Vanya
+Polina
+['2, 3']
+['1, 2, 3, 4']
+['2, 3, 4']
+6.0
+
+QstOneAnswer
+What year were you born?
+3
+2002
+1997
+2001
+1
+1.0
+
+QstSomeAnswer
+What are your favourite cities?
+5
+Kyiv
+Barcelona
+Lviv
+London
+Toronto
+2
+1 4 
+2.0
+
+QstEnterText
+What is your favourite holday?
+I don`t have favourite holiday
+5.0
+

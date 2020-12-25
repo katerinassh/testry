@@ -3,6 +3,7 @@ from creator_design import Ui_MainWindow
 from create_test_design import Form2
 from edit_test_design import Form3
 from delete_test_design import Form4
+from feedback_test_design import Form5
 from warning1_design import Warning1
 from warning2_design import Warning2
 import interaction_with_questions
@@ -26,6 +27,7 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
         self.radioButton_2 = self.findChild(QtWidgets.QRadioButton, 'radioButton_2')
         self.radioButton_3 = self.findChild(QtWidgets.QRadioButton, 'radioButton_3')
         self.radioButton_4 = self.findChild(QtWidgets.QRadioButton, 'radioButton_4')
+
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
         self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
 
@@ -46,6 +48,12 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
                 self.warning1()
             else:
                 self.window4()
+
+        elif self.radioButton_4.isChecked():
+            if self.lineEdit.text() == '':
+                self.warning1()
+            else:
+                self.window5()
 
     def main_window(self):
         self.ui = Ui_MainWindow()
@@ -69,6 +77,13 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
         if FileNotFoundError:
             self.warning2()
         self.w4.show()
+
+    def window5(self): # показывает окно для получения результатов теста
+        self.w5 = FeedbackWindow(self.lineEdit.text())
+        if FileNotFoundError:
+            self.warning2()
+        self.w5.show()
+        self.hide()
 
     def warning1(self): # показывает окно с предупреждением о том, что назввание теста было не написано
         self.war = WarningWindow1()
@@ -164,6 +179,78 @@ class EditWindow(QtWidgets.QMainWindow):
     def window4(self):
         self.w4 = DeleteWindow(self.title)
         self.w4.show()
+
+    def selectQstAdd(self):
+        self.wAdd = interaction_with_questions.AddQuestion(self.title, self.current_test)
+        self.wAdd.show()
+
+    def selectQstEdit(self):
+        self.wEdit = interaction_with_questions.EditQuestion(self.title, self.current_test)
+        self.wEdit.show()
+
+    def selectQstDelete(self):
+        self.wDelete = interaction_with_questions.DeleteQuestion(self.title, self.current_test)
+        self.wDelete.show()
+
+
+class FeedbackWindow(QtWidgets.QMainWindow):
+    def __init__(self, title):
+        super(FeedbackWindow, self).__init__()
+        self.ui = Form5()
+        self.ui.setupUi(self)
+
+        self.title = title
+        self.current_test = None
+
+        self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
+        self.label_2.setText(self.title)
+        self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+
+        self.pushButton_1 = self.findChild(QtWidgets.QPushButton, 'pushButton_1')
+        self.pushButton.clicked.connect(self.selectSortName)
+        self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
+        self.pushButton_2.clicked.connect(self.selectSortMark)
+        self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
+        self.pushButton_3.clicked.connect(self.selectFilter)
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.selectStatictics)
+
+        self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
+        self.pushButton_5.clicked.connect(self.window1)
+        self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')
+        self.pushButton_6.clicked.connect(self.window4)
+        self.loadFile()
+        self.open()
+        #self.upd_feedback()
+
+    def loadFile(self): # загружает на форму тест из файла
+        file = open('{}_answers.txt'.format(self.title), 'r')
+        with file:
+            data = file.read()
+        self.label_3.setText(data)
+
+    def open(self): # открывает тест
+        file = open('{}_answers.txt'.format(self.title), 'r')
+        title = file.readline().strip('\n')
+        _ = file.readline()
+        self.current_test = test.Test(title)
+        #self.current_test.readFromFile(file)
+
+   # def upd_feedback(self):
+    #    self.feedback = feedback.Feedback(self.current_test.title, len(self.current_test.questions))
+
+    def window1(self):
+        self.w1 = MainWindow()
+        self.w1.show()
+        self.hide()
+
+    def window4(self):
+        self.w4 = DeleteWindow(self.title)
+        self.w4.show()
+
+    def selectselectSortName(self):
+        self.wSortN = ...
+
 
     def selectQstAdd(self):
         self.wAdd = interaction_with_questions.AddQuestion(self.title, self.current_test)
