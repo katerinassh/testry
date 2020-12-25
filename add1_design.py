@@ -11,11 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Form5(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Add question")
-        Form.resize(450, 200)
-        self.frame = QtWidgets.QFrame(Form)
+class Form0(object):
+    def setupUi(self, widget):
+        widget.setObjectName("widget")
+        widget.resize(450, 200)
+        self.frame = QtWidgets.QFrame(widget)
         self.frame.setGeometry(QtCore.QRect(0, 0, 451, 201))
         self.frame.setStyleSheet("background-color: rgb(246, 247, 250);\n"
 "color: rgb(110, 55, 238);\n"
@@ -25,32 +25,35 @@ class Form5(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.label_2 = QtWidgets.QLabel(self.frame)
-        self.label_2.setGeometry(QtCore.QRect(0, 40, 451, 20))
+        self.label_2.setGeometry(QtCore.QRect(0, 19, 451, 41))
+        self.label_2.setTextFormat(QtCore.Qt.RichText)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.pushButton = QtWidgets.QPushButton(self.frame)
-        self.pushButton.setGeometry(QtCore.QRect(270, 140, 151, 41))
+        self.pushButton_next = QtWidgets.QPushButton(self.frame)
+        self.pushButton_next.setGeometry(QtCore.QRect(310, 140, 111, 41))
         font = QtGui.QFont()
-        font.setFamily(".AppleSystemUIFont")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.07, y1:0.227364, x2:0.895, y2:0.847, stop:0 rgba(110, 55, 238, 255), stop:0.487562 rgba(138, 110, 215, 255), stop:1 rgba(147, 134, 190, 255));\n"
-"border-radius: 18px;\n"
-"color: rgb(255, 255, 255);")
-        self.pushButton.setObjectName("pushButton")
-        self.comboBox = QtWidgets.QComboBox(self.frame)
-        self.comboBox.setGeometry(QtCore.QRect(75, 80, 300, 25))
-        font = QtGui.QFont()
-        font.setFamily(".AppleSystemUIFont")
+        font.setFamily("MS Shell Dlg 2")
         font.setPointSize(14)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
+        self.pushButton_next.setFont(font)
+        self.pushButton_next.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pushButton_next.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.07, y1:0.227364, x2:0.895, y2:0.847, stop:0 rgba(110, 55, 238, 255), stop:0.487562 rgba(138, 110, 215, 255), stop:1 rgba(147, 134, 190, 255));\n"
+"font: 14pt \"MS Shell Dlg 2\";\n"
+"border-radius: 14px;\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_next.setObjectName("pushButton_next")
+        self.comboBox = QtWidgets.QComboBox(self.frame)
+        self.comboBox.setGeometry(QtCore.QRect(75, 80, 300, 25))
+        font = QtGui.QFont()
+        font.setFamily(".AppleSystemUIFont")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.comboBox.setFont(font)
-        self.comboBox.setStyleSheet("font: 14pt \".AppleSystemUIFont\";\n"
+        self.comboBox.setStyleSheet("font: 12pt \".AppleSystemUIFont\";\n"
 "background-color: rgb(255, 255, 255);")
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
@@ -61,18 +64,18 @@ class Form5(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(widget)
+        QtCore.QMetaObject.connectSlotsByName(widget)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, widget):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Add question"))
-        self.label_2.setText(_translate("Form", "Select what type of question you want to add"))
-        self.pushButton.setText(_translate("Form", "Next"))
-        self.comboBox.setItemText(0, _translate("Form", "Text answer"))
-        self.comboBox.setItemText(1, _translate("Form", "True/False"))
-        self.comboBox.setItemText(2, _translate("Form", "With answer options"))
-        self.comboBox.setItemText(3, _translate("Form", "Flags"))
-        self.comboBox.setItemText(4, _translate("Form", "Linear scale"))
-        self.comboBox.setItemText(5, _translate("Form", "Table with answer options"))
-        self.comboBox.setItemText(6, _translate("Form", "Grid of flags"))
+        widget.setWindowTitle(_translate("widget", "Form"))
+        self.label_2.setText(_translate("widget", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Select what type of question you want to add</span></p></body></html>"))
+        self.pushButton_next.setText(_translate("widget", "Next"))
+        self.comboBox.setItemText(0, _translate("widget", "Text answer"))
+        self.comboBox.setItemText(1, _translate("widget", "True/False"))
+        self.comboBox.setItemText(2, _translate("widget", "With answer options"))
+        self.comboBox.setItemText(3, _translate("widget", "Flags"))
+        self.comboBox.setItemText(4, _translate("widget", "Linear scale"))
+        self.comboBox.setItemText(5, _translate("widget", "Table with answer options"))
+        self.comboBox.setItemText(6, _translate("widget", "Grid of flags"))

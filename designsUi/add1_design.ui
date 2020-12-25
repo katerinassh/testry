@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>widget</class>
+ <widget class="QWidget" name="widget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -38,39 +38,46 @@ color: rgb(139, 140, 166);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>40</y>
+      <y>19</y>
       <width>451</width>
-      <height>20</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>Select what type of question you want to add</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Select what type of question you want to add&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButton_next">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>310</x>
       <y>140</y>
-      <width>151</width>
+      <width>111</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>.AppleSystemUIFont</family>
-      <pointsize>16</pointsize>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>14</pointsize>
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: qlineargradient(spread:pad, x1:0.07, y1:0.227364, x2:0.895, y2:0.847, stop:0 rgba(110, 55, 238, 255), stop:0.487562 rgba(138, 110, 215, 255), stop:1 rgba(147, 134, 190, 255));
-border-radius: 18px;
+font: 14pt &quot;MS Shell Dlg 2&quot;;
+border-radius: 14px;
 color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
@@ -89,14 +96,14 @@ color: rgb(255, 255, 255);</string>
     <property name="font">
      <font>
       <family>.AppleSystemUIFont</family>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
       <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 14pt &quot;.AppleSystemUIFont&quot;;
+     <string notr="true">font: 12pt &quot;.AppleSystemUIFont&quot;;
 background-color: rgb(255, 255, 255);</string>
     </property>
     <item>

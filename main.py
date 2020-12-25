@@ -1,4 +1,6 @@
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
+
 from creator_design import Ui_MainWindow
 from create_test_design import Form2
 from edit_test_design import Form3
@@ -6,6 +8,7 @@ from delete_test_design import Form4
 from feedback_test_design import Form5
 from warning1_design import Warning1
 from warning2_design import Warning2
+
 import interaction_with_questions
 import to_filter_data
 
@@ -168,9 +171,10 @@ class EditWindow(QtWidgets.QMainWindow):
         description = file.readline().strip('\n')
         _ = file.readline()
         self.current_test = test.Test(title, description)
+
         #self.current_test.readFromFile(file)
 
-   # def upd_feedback(self):
+    # def upd_feedback(self):
     #    self.feedback = feedback.Feedback(self.current_test.title, len(self.current_test.questions))
 
     def window1(self):
@@ -183,7 +187,7 @@ class EditWindow(QtWidgets.QMainWindow):
         self.w4.show()
 
     def selectQstAdd(self):
-        self.wAdd = interaction_with_questions.AddQuestion(self.title, self.current_test)
+        self.wAdd = interaction_with_questions.AddQuestion(self.title)
         self.wAdd.show()
 
     def selectQstEdit(self):
@@ -207,7 +211,6 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
         self.label_2.setText(self.title)
         self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
-        self.scrollArea = self.findChild(QtWidgets.QScrollArea, 'scrollArea')
 
         self.pushButton_1 = self.findChild(QtWidgets.QPushButton, 'pushButton_1')
         #self.pushButton_1.clicked.connect(self.selectSortName)
@@ -220,8 +223,8 @@ class FeedbackWindow(QtWidgets.QMainWindow):
 
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window1)
-        self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')
-        self.pushButton_6.clicked.connect(self.window4)
+        self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')  #  кнопка збереження файлу, що відображається
+        #self.pushButton_6.clicked.connect()
         self.loadFile()
         #self.open()
         #self.upd_feedback()
@@ -231,8 +234,22 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         with file:
             data = file.read()
         self.label_3.setText(data)
-        #self.scrollArea.setCentralWidget(self.label_3)
-        self.scrollArea.show()
+
+    #     self.scrollArea = QtWidgets.QScrollArea(self)
+    #     self.scrollArea.setWidget(self.label_3)
+    #     self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    #
+    #     self.scrollbar = QtWidgets.QScrollBar(Qt.Vertical, self)
+    #     self.scrollbar.setMaximum(self.scrollArea.verticalScrollBar().maximum())
+    #     self.scrollbar.valueChanged.connect(self.sync_func)
+    #
+    #     self.v_layout = QtWidgets.QVBoxLayout(self)
+    #     self.v_layout.addWidget(self.scrollArea)
+    #     self.v_layout.addWidget(self.scrollbar)
+    #
+    # def sync_func(self):
+    #     self.scroll_area.verticalScrollBar().setValue(self.scrollbar.value())
+
 
 
 
@@ -300,6 +317,7 @@ class DeleteWindow(QtWidgets.QMainWindow):
         os.remove('{}.txt'.format(self.title))
         os.remove('{}_answers.txt'.format(self.title))
         self.label_3.setText('Deleted!')
+
 
 class WarningWindow1(QtWidgets.QMainWindow):
     def __init__(self):
