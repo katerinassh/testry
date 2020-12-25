@@ -7,8 +7,10 @@ from feedback_test_design import Form5
 from warning1_design import Warning1
 from warning2_design import Warning2
 import interaction_with_questions
+import to_filter_data
 
 import test
+import feedback
 import sys
 import os
 
@@ -205,35 +207,40 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
         self.label_2.setText(self.title)
         self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+        self.scrollArea = self.findChild(QtWidgets.QScrollArea, 'scrollArea')
 
         self.pushButton_1 = self.findChild(QtWidgets.QPushButton, 'pushButton_1')
-        self.pushButton.clicked.connect(self.selectSortName)
+        #self.pushButton_1.clicked.connect(self.selectSortName)
         self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
-        self.pushButton_2.clicked.connect(self.selectSortMark)
+        #self.pushButton_2.clicked.connect(self.selectSortMark)
         self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
-        self.pushButton_3.clicked.connect(self.selectFilter)
+        #self.pushButton_3.clicked.connect(self.selectFilter)
         self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
-        self.pushButton_4.clicked.connect(self.selectStatictics)
+        #self.pushButton_4.clicked.connect(self.selectStatictics)
 
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window1)
         self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')
         self.pushButton_6.clicked.connect(self.window4)
         self.loadFile()
-        self.open()
+        #self.open()
         #self.upd_feedback()
 
-    def loadFile(self): # загружает на форму тест из файла
+    def loadFile(self): # загружает на форму ответы из файла
         file = open('{}_answers.txt'.format(self.title), 'r')
         with file:
             data = file.read()
         self.label_3.setText(data)
+        #self.scrollArea.setCentralWidget(self.label_3)
+        self.scrollArea.show()
 
-    def open(self): # открывает тест
-        file = open('{}_answers.txt'.format(self.title), 'r')
-        title = file.readline().strip('\n')
-        _ = file.readline()
-        self.current_test = test.Test(title)
+
+
+   # def open(self): # открывает тест
+    #    file = open('{}_answers.txt'.format(self.title), 'r')
+    #    title = file.readline().strip('\n')
+    #    _ = file.readline()
+     #   self.current_test = test.Test(title, description)
         #self.current_test.readFromFile(file)
 
    # def upd_feedback(self):
@@ -250,6 +257,10 @@ class FeedbackWindow(QtWidgets.QMainWindow):
 
     def selectselectSortName(self):
         self.wSortN = ...
+
+    def selectFilter(self):
+        self.wFilter = to_filter_data.FilterByMark(self.ans_file)
+        self.wFilter.show()
 
 
     def selectQstAdd(self):
