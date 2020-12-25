@@ -155,6 +155,8 @@ class EditWindow(QtWidgets.QMainWindow):
         self.pushButton_4.clicked.connect(self.window1)
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window4)
+        self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')
+        self.pushButton_6.clicked.connect(self.refresh)
         self.loadFile()
         self.open()
         #self.upd_feedback()
@@ -164,6 +166,10 @@ class EditWindow(QtWidgets.QMainWindow):
         with file:
             data = file.read()
         self.label_3.setText(data)
+
+    def refresh(self):
+        self.current_test.workTestFile()
+        self.loadFile()
 
     def open(self): # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
@@ -187,15 +193,16 @@ class EditWindow(QtWidgets.QMainWindow):
         self.w4.show()
 
     def selectQstAdd(self):
-        self.wAdd = interaction_with_questions.AddQuestion(self.title)
+        self.wAdd = interaction_with_questions.AddQuestion(self.current_test)
+        self.current_test.qamount += 1
         self.wAdd.show()
 
     def selectQstEdit(self):
-        self.wEdit = interaction_with_questions.EditQuestion(self.title, self.current_test)
+        self.wEdit = interaction_with_questions.EditQuestion(self.current_test)
         self.wEdit.show()
 
     def selectQstDelete(self):
-        self.wDelete = interaction_with_questions.DeleteQuestion(self.title, self.current_test)
+        self.wDelete = interaction_with_questions.DeleteQuestion(self.current_test)
         self.wDelete.show()
 
 

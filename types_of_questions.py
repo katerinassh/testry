@@ -81,14 +81,6 @@ class QstEnterText(Qst):  # клас для виду запитань із вв�
     def printQ(self):
         print(str(self._question))
 
-    def add(self):
-        print('Input question')
-        self._question = input()
-        print('Input the right answer')
-        self._right_answer = input()
-        print('Input question valuation')
-        self.rating = input()
-
     def writeTestFile(self, the_file):
         the_file.write('QstEnterText\n')
         the_file.write(str(self._question) + "\n" + str(self._right_answer) + "\n" + str(self.rating) + "\n\n")

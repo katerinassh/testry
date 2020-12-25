@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'edit_test.ui'
+# Form implementation generated from reading ui file 'designsUi/edit_test_design.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Form3(object):
     def setupUi(self, Form):
-        Form.setObjectName("Edit the test")
+        Form.setObjectName("Form")
         Form.resize(800, 600)
         Form.setStyleSheet("background-color: rgb(246, 247, 250);\n"
 "")
@@ -25,7 +25,7 @@ class Form3(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(20, 20, 331, 31))
+        self.label.setGeometry(QtCore.QRect(120, 20, 291, 31))
         font = QtGui.QFont()
         font.setFamily(".AppleSystemUIFont")
         font.setPointSize(16)
@@ -67,7 +67,7 @@ class Form3(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.frame)
-        self.pushButton_4.setGeometry(QtCore.QRect(60, 540, 151, 41))
+        self.pushButton_4.setGeometry(QtCore.QRect(40, 540, 141, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -87,7 +87,7 @@ class Form3(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_5.setObjectName("pushButton_5")
         self.label_2 = QtWidgets.QLabel(self.frame)
-        self.label_2.setGeometry(QtCore.QRect(320, 24, 281, 26))
+        self.label_2.setGeometry(QtCore.QRect(420, 24, 371, 26))
         font = QtGui.QFont()
         font.setFamily(".AppleSystemUIFont")
         font.setPointSize(16)
@@ -112,13 +112,23 @@ class Form3(object):
         self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.label_3.setWordWrap(True)
         self.label_3.setObjectName("label_3")
+        self.pushButton_6 = QtWidgets.QPushButton(self.frame)
+        self.pushButton_6.setGeometry(QtCore.QRect(30, 20, 61, 30))
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setStyleSheet("background-color: rgb(139, 149, 166);\n"
+"border-radius: 12px;\n"
+"color: rgb(255, 255, 255);")
+        self.pushButton_6.setObjectName("pushButton_6")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Edit the test"))
+        Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "<html><head/><body><p>Select an action to interact with the test</p></body></html>"))
         self.pushButton.setText(_translate("Form", "Add new question"))
         self.pushButton_2.setText(_translate("Form", "Edit existing question"))
@@ -126,3 +136,4 @@ class Form3(object):
         self.pushButton_4.setText(_translate("Form", "Back to main menu"))
         self.pushButton_5.setText(_translate("Form", "Delete test"))
         self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-weight:600;\">test name</span></p><p><br/></p></body></html>"))
+        self.pushButton_6.setText(_translate("Form", "refresh"))

@@ -1,3 +1,13 @@
 myTest
 i want to test this program
 
+QstEnterText
+question
+word word word
+3
+
+QstEnterText
+question3
+word word wordvmfnbvlgnb
+2
+
