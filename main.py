@@ -3,9 +3,10 @@ from creator_design import Ui_MainWindow
 from create_test_design import Form2
 from edit_test_design import Form3
 from delete_test_design import Form4
+from warning1_design import Warning1
+from warning2_design import Warning2
 import interaction_with_questions
 
-import warnings
 import test
 import sys
 import os
@@ -70,11 +71,11 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
         self.w4.show()
 
     def warning1(self): # показывает окно с предупреждением о том, что назввание теста было не написано
-        self.war = warnings.WarningWindow1()
+        self.war = WarningWindow1()
         self.war.show()
 
     def warning2(self): # показывает окно с предупреждением о том, что такого теста не существует
-        self.war = warnings.WarningWindow2()
+        self.war = WarningWindow2()
         self.war.show()
 
 
@@ -201,6 +202,25 @@ class DeleteWindow(QtWidgets.QMainWindow):
         os.remove('{}.txt'.format(self.title))
         os.remove('{}_answers.txt'.format(self.title))
         self.label_3.setText('Deleted!')
+
+class WarningWindow1(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(WarningWindow1, self).__init__()
+        self.ui = Warning1()
+        self.ui.setupUi(self)
+
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.close)
+
+
+class WarningWindow2(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(WarningWindow2, self).__init__()
+        self.ui = Warning2()
+        self.ui.setupUi(self)
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.close)
 
 
 app = QtWidgets.QApplication([])
