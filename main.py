@@ -168,7 +168,6 @@ class EditWindow(QtWidgets.QMainWindow):
         self.label_3.setText(data)
 
     def refresh(self):
-        self.current_test.workTestFile()
         self.loadFile()
 
     def open(self): # открывает тест
@@ -177,6 +176,7 @@ class EditWindow(QtWidgets.QMainWindow):
         description = file.readline().strip('\n')
         _ = file.readline()
         self.current_test = test.Test(title, description)
+        self.current_test.readFromFile(file)
 
         #self.current_test.readFromFile(file)
 

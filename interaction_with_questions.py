@@ -31,21 +31,31 @@ class AddQuestion(QtWidgets.QMainWindow): #окно для выбора типа
             self.wAddQstText = AddQstText(self.current_test, self.qst)
             self.wAddQstText.show()
         elif str(self.comboBox.currentText()) == 'With answer options':
-            qst = types_of_questions.QstOneAnswer()
+            self.qst = types_of_questions.QstOneAnswer()
+            #self.wAddQstOneAnswer = AddQstOneAnswer(self.current_test, self.qst)
+            #self.wAddQstOneAnswer.show()
         elif str(self.comboBox.currentText()) == 'Flags':
-            qst = types_of_questions.QstSomeAnswer()
+            self.qst = types_of_questions.QstSomeAnswer()
+            #self.wAddQstSomeAnswer = AddQstSomeAnswer(self.current_test, self.qst)
+            #self.wAddQstSomeAnswer.show()
         elif str(self.comboBox.currentText()) == 'Linear Scale':
-            qst = types_of_questions.QstScale()
+            self.qst = types_of_questions.QstScale()
+            #self.wAddQstScale = AddQstScale(self.current_test, self.qst)
+            #self.wAddQstScale.show()
         elif str(self.comboBox.currentText()) == 'Table with answer options':
-            qst = types_of_questions.QstTableOne()
+            self.qst = types_of_questions.QstTableOne()
+            #self.wAddTableOne = AddQstTableOne(self.current_test, self.qst)
+            #self.wAddQstTableOne.show()
         elif str(self.comboBox.currentText()) == 'Grid of flags':
-            qst = types_of_questions.QstTable()
+            self.qst = types_of_questions.QstTable()
+            #self.wAddTable = AddQstTable(self.current_test, self.qst)
+            #self.wAddQstTable.show()
         else:
-            qst = types_of_questions.QstName()
+            self.qst = types_of_questions.QstName()
         self.hide()
 
 
-class AddQstText(QtWidgets.QMainWindow):
+class AddQstText(QtWidgets.QMainWindow): # окно для добавление типа вопроса QstEnterText
     def __init__(self, test, qst):
         super(AddQstText, self).__init__()
         self.ui = Form_AddQstText()
@@ -56,7 +66,7 @@ class AddQstText(QtWidgets.QMainWindow):
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
         self.pushButton.clicked.connect(self.w)
 
-    def add(self):
+    def add(self): # добавление параметров
         self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
         self.qst._question = self.lineEdit.text()
         self.lineEdit_4 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_4')
@@ -64,9 +74,10 @@ class AddQstText(QtWidgets.QMainWindow):
         self.lineEdit_2 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_2')
         self.qst.rating = self.lineEdit_2.text()
 
-    def w(self):
+    def w(self): #добавление вопроса в тест и файл теста
         self.add()
         self.current_test.questions.append(self.qst)
+        self.current_test.workTestFile()
         self.hide()
 
 
@@ -75,8 +86,6 @@ class AddQstTF(QtWidgets.QMainWindow):
         super(AddQstTF, self).__init__()
         self.ui = Form_AddQstTF()
         self.ui.setupUi(self)
-
-
 
 
 class EditQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для редактирования
