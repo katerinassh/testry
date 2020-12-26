@@ -61,4 +61,4 @@ class Form7(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Delete question"))
         self.label_2.setText(_translate("Form", "Question you want to delete"))
-        self.pushButton.setText(_translate("Form", "Next"))
+        self.pushButton.setText(_translate("Form", "Delete"))

@@ -322,8 +322,19 @@ class EditQuestion(QtWidgets.QMainWindow): # окно для выбора воп
 class DeleteQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для удаления
     def __init__(self, test):
         super(DeleteQuestion, self).__init__()
-        self.ui = Form6()
+        self.ui = Form7()
         self.ui.setupUi(self)
         self.current_test = test
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.delete_qst)
+        self.comboBox = self.findChild(QtWidgets.QComboBox, 'comboBox')
+        for i in range(1, len(self.current_test.questions)):
+            self.comboBox.addItem(str(i) + " - " + self.current_test.questions[i]._question)
+
+    def delete_qst(self): # удаляет выбранный вопрос
+        number = int(str(self.comboBox.currentText()).split(" - ")[0])
+        self.current_test.questions.pop(number)
+        self.current_test.qamount -= 1
+        self.current_test.workTestFile()
+        self.hide()
