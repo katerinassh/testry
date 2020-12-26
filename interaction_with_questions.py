@@ -314,9 +314,13 @@ class EditQuestion(QtWidgets.QMainWindow): # окно для выбора воп
         self.current_test = test
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        #self.pushButton.clicked.connect(self.select_qst_for_editing)
         self.comboBox = self.findChild(QtWidgets.QComboBox, 'comboBox')
         for i in range(1, len(self.current_test.questions)):
             self.comboBox.addItem(str(i) + " - " + self.current_test.questions[i]._question)
+
+   # def select_qst_for_editing(self): # определеняет, какой вопрос нужно открыть для редактирования
+
 
 
 class DeleteQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для удаления
