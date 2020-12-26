@@ -4,10 +4,30 @@ i want to test this program
 QstEnterText
 question
 word word word
-3
+3.0
 
 QstEnterText
-question3
-word word wordvmfnbvlgnb
+question44543
+something
+2.0
+
+QstOneAnswer
+One answer
+3
+choice1
+choice2
+choice3
 2
+5.0
+
+QstSomeAnswer
+new
+4
+choice1
+choice2
+choice3
+choice4
+3
+2 3 4 
+3
 

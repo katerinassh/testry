@@ -96,6 +96,7 @@ class QstOneAnswer(Qst):  # запитання з вибором однієї п
         super(Qst, self).__init__()
         self._answerOptions = []
         self._rightAnswerIndex = None
+        self.numOptions = 0
 
     def enterOption(self, option):
         self._answerOptions.append(option)
@@ -104,9 +105,9 @@ class QstOneAnswer(Qst):  # запитання з вибором однієї п
         print('Input question')
         self._question = input()
         print('Input number of options')
-        numOptions = int(input())
-        self._answerOptions = [] * numOptions
-        for i in range(numOptions):
+        self.numOptions = int(input())
+        self._answerOptions = [] * self.numOptions
+        for i in range(self.numOptions):
             print('Input option ' + str(i + 1) + ' : ')
             option = input()
             self.enterOption(option)
@@ -124,7 +125,7 @@ class QstOneAnswer(Qst):  # запитання з вибором однієї п
     def writeTestFile(self, file):
         file.write('QstOneAnswer\n')
         file.write(self._question + '\n')
-        file.write(str(len(self._answerOptions)) + '\n')
+        file.write(str(self.numOptions) + '\n')
         for i in self._answerOptions:
             file.write(i + '\n')
         file.write(str(self._rightAnswerIndex) + '\n')
@@ -132,9 +133,9 @@ class QstOneAnswer(Qst):  # запитання з вибором однієї п
 
     def readTestFile(self, file):
         self._question = file.readline().strip("\n")
-        numOptions = int(file.readline().strip("\n"))
-        self._answerOptions = [None] * numOptions
-        for i in range(numOptions):
+        self.numOptions = int(file.readline().strip("\n"))
+        self._answerOptions = [None] * self.numOptions
+        for i in range(self.numOptions):
             self._answerOptions[i] = file.readline().strip("\n")
         self._rightAnswerIndex = int(file.readline().strip("\n"))
         self.rating = float(file.readline().strip("\n"))
@@ -150,20 +151,21 @@ class QstSomeAnswer(QstOneAnswer):  # запитання з вибором де�
     def __init__(self):
         super().__init__()
         self._rightAnswerIndexArr = []
+        self.numOptions = 0
 
     def add(self):
         print('Input question')
         self._question = input()
         print('Input number of options')
-        numOptions = int(input())
-        self._answerOptions = [] * numOptions
-        for i in range(numOptions):
+        self.numOptions = int(input())
+        self._answerOptions = [] * self.numOptions
+        for i in range(self.numOptions):
             print('Input option ' + str(i + 1) + ' : ')
             option = input()
             self.enterOption(option)
         print('Input number of right options')
-        numRight = int(input())
-        for i in range(numRight):
+        self.numRight = int(input())
+        for i in range(self.numRight):
             print('Input index of right answer ' + str(i + 1) + ' : ')
             right = input()
             self._rightAnswerIndexArr.append(int(right))
@@ -183,8 +185,8 @@ class QstSomeAnswer(QstOneAnswer):  # запитання з вибором де�
     def writeTestFile(self, file):
         file.write('QstSomeAnswer\n')
         file.write(str(self._question) + '\n')
-        file.write(str(len(self._answerOptions)) + '\n')
-        for i in range(len(self._answerOptions)):
+        file.write(str(self.numOptions) + '\n')
+        for i in range(self.numOptions):
             file.write(self._answerOptions[i] + '\n')
 
         file.write(str(len(self._rightAnswerIndexArr)) + '\n')
@@ -195,14 +197,14 @@ class QstSomeAnswer(QstOneAnswer):  # запитання з вибором де�
 
     def readTestFile(self, file):
         self._question = file.readline().strip("\n")
-        numOptions = int(file.readline().strip("\n"))
-        self._answerOptions = [None] * numOptions
-        for i in range(numOptions):
+        self.numOptions = int(file.readline().strip("\n"))
+        self._answerOptions = [None] * self.numOptions
+        for i in range(self.numOptions):
             self._answerOptions[i] = file.readline().strip("\n")
-        numRight = int(file.readline().strip("\n"))
-        self._rightAnswerIndexArr = [None] * numRight
+        self.numRight = int(file.readline().strip("\n"))
+        self._rightAnswerIndexArr = [None] * self.numRight
         rights = file.readline().strip("\n").split(' ')
-        for i in range(numRight):
+        for i in range(self.numRight):
             self._rightAnswerIndexArr[i] = rights[i]
         self.rating = float(file.readline().strip("\n"))
 
