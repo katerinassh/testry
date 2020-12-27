@@ -661,6 +661,17 @@ class EdQstSomeAnswer(QtWidgets.QMainWindow): # окно для редактир
             if self.lineEdit_7.text() != '':
                 self.qst._answerOptions.append(self.lineEdit_7.text())
 
+        if self.lineEdit_3.text() == '':
+            self.qst.numOptions -= 1
+        if self.lineEdit_4.text() == '':
+            self.qst.numOptions -= 1
+        if self.lineEdit_5.text() == '':
+            self.qst.numOptions -= 1
+        if self.lineEdit_6.text() == '':
+            self.qst.numOptions -= 1
+        if self.lineEdit_7.text() == '':
+            self.qst.numOptions -= 1
+
         if self.checkBox.isChecked():
             self.qst._rightAnswerIndexArr.append('1')
         if self.checkBox_2.isChecked():

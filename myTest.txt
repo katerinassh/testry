@@ -1,2 +1,13 @@
 myTest
 i want to test this program
+
+QstSomeAnswer
+Who are you friends?
+3
+Vanya
+Tim
+Lera
+2
+2 3 
+7
+
