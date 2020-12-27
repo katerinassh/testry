@@ -6,6 +6,8 @@ from addQstTF_design import Form_AddQstTF
 from addQstOneAnswer_design import Form_AddQstOneAnswer
 from addQstSomeAnswer_design import Form_AddQstSomeAnswer
 
+from edQstTF_design import Form_EdQstTF
+
 from edit_question_design import Form6
 from delete_question_design import Form7
 
@@ -312,15 +314,61 @@ class EditQuestion(QtWidgets.QMainWindow): # окно для выбора воп
         self.ui = Form6()
         self.ui.setupUi(self)
         self.current_test = test
+        self.qst = None
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
-        #self.pushButton.clicked.connect(self.select_qst_for_editing)
+        self.pushButton.clicked.connect(self.select_qst_for_editing)
         self.comboBox = self.findChild(QtWidgets.QComboBox, 'comboBox')
         for i in range(1, len(self.current_test.questions)):
             self.comboBox.addItem(str(i) + " - " + self.current_test.questions[i]._question)
 
-   # def select_qst_for_editing(self): # определеняет, какой вопрос нужно открыть для редактирования
+    def select_qst_for_editing(self): # определеняет, какой вопрос нужно открыть для редактирования
+        number = int(str(self.comboBox.currentText()).split(" - ")[0])
+        type = self.current_test.questions[number].__doc__
+        if type == 'True/False':
+            self.qst = self.current_test.questions[number]
+            self.wEdQstTF = EdQstTF(self.current_test, self.qst, number)
+            self.wEdQstTF.show()
+        self.hide()
 
+class EdQstTF(QtWidgets.QMainWindow): # окно для редактирование true/false question
+    def __init__(self, test, qst, number):
+        super(EdQstTF, self).__init__()
+        self.ui = Form_EdQstTF()
+        self.ui.setupUi(self)
+
+        self.current_test = test
+        self.qst = qst
+        self.number = number
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.w)
+
+        self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
+        self.lineEdit.setText(self.qst._question)
+        self.lineEdit_2 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_2')
+        self.lineEdit_2.setText(str(self.qst.rating))
+        self.radioButton = self.findChild(QtWidgets.QRadioButton, 'radioButton')
+        self.radioButton_2 = self.findChild(QtWidgets.QRadioButton, 'radioButton_2')
+        if self.qst._right_answer == 'True':
+            self.radioButton.setChecked(True)
+        if self.qst._right_answer == 'False':
+            self.radioButton_2.setChecked(True)
+
+    def edit(self): # пересмотр полей с параметрами
+        self.qst._question = self.lineEdit.text()
+        self.qst.rating = self.lineEdit_2.text()
+        if self.radioButton.isChecked():
+            self.qst._right_answer = "True"
+        elif self.radioButton_2.isChecked():
+            self.qst._right_answer = "False"
+
+    def w(self):  # удаление вопроса с теста, замена на отредактированый и запись в файл теста
+        self.edit()
+        self.current_test.questions.pop(self.number)
+        self.current_test.questions.insert(self.number, self.qst)
+        self.current_test.workTestFile()
+        self.hide()
 
 
 class DeleteQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для удаления

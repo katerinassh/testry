@@ -34,6 +34,7 @@ class Qst:  # Fabric
 
 
 class QstTrueFalse(Qst):  # клас для виду запитань із двома варіантами відповіді правда/брехня
+    """True/False"""
     def __init__(self):
         super(Qst, self).__init__()
         self._answerOptions = ["True", "False"]
@@ -68,6 +69,7 @@ class QstTrueFalse(Qst):  # клас для виду запитань із дв�
 
 
 class QstEnterText(Qst):  # клас для виду запитань із введенням текстової відповідді
+    """Text answer"""
     def __init__(self):
         super(Qst, self).__init__()
 
@@ -92,6 +94,7 @@ class QstEnterText(Qst):  # клас для виду запитань із вв�
 
 
 class QstOneAnswer(Qst):  # запитання з вибором однієї правильної відповіді
+    """With answer options"""
     def __init__(self):
         super(Qst, self).__init__()
         self._answerOptions = []
@@ -148,6 +151,7 @@ class QstOneAnswer(Qst):  # запитання з вибором однієї п
 
 
 class QstSomeAnswer(QstOneAnswer):  # запитання з вибором декількох правильних відповідей, наслідує клас з одним правильним
+    """Flags"""
     def __init__(self):
         super().__init__()
         self._rightAnswerIndexArr = []
@@ -210,6 +214,7 @@ class QstSomeAnswer(QstOneAnswer):  # запитання з вибором де�
 
 
 class QstTable(Qst):  # запитання з кількома варіантами відповіді в таблиці
+    """Grid of flags"""
     def __init__(self):
         self.num_answers = 0
         self.num_questions = 0
@@ -314,6 +319,7 @@ class QstTable(Qst):  # запитання з кількома варіанта�
 
 
 class QstScale(Qst):  # запитання з відповіддю числом (передбачало шкалу з повзунком)
+    """Linear scale"""
     def __init__(self):
         super(Qst, self).__init__()
         # self.start = 0
@@ -346,6 +352,7 @@ class QstScale(Qst):  # запитання з відповіддю числом 
 
 
 class QstTableOne(Qst):  # встановлення відповідності
+    """Table with answer options"""
     def __init__(self):
         self.num_answers = 0
         self.text_answers = []
