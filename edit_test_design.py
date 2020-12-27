@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Form3(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        Form.setObjectName("Edit the test")
         Form.resize(800, 600)
         Form.setStyleSheet("background-color: rgb(246, 247, 250);\n"
 "")
@@ -67,7 +67,7 @@ class Form3(object):
 "color: rgb(255, 255, 255);")
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.frame)
-        self.pushButton_4.setGeometry(QtCore.QRect(40, 540, 141, 41))
+        self.pushButton_4.setGeometry(QtCore.QRect(60, 540, 141, 41))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
@@ -99,19 +99,6 @@ class Form3(object):
 "color:  rgb(139, 149, 166);")
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
-        self.label_3 = QtWidgets.QLabel(self.frame)
-        self.label_3.setGeometry(QtCore.QRect(20, 70, 500, 450))
-        font = QtGui.QFont()
-        font.setKerning(False)
-        self.label_3.setFont(font)
-        self.label_3.setMouseTracking(False)
-        self.label_3.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"padding: 10px")
-        self.label_3.setLineWidth(4)
-        self.label_3.setText("")
-        self.label_3.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.label_3.setWordWrap(True)
-        self.label_3.setObjectName("label_3")
         self.pushButton_6 = QtWidgets.QPushButton(self.frame)
         self.pushButton_6.setGeometry(QtCore.QRect(30, 20, 61, 30))
         font = QtGui.QFont()
@@ -122,13 +109,19 @@ class Form3(object):
 "border-radius: 12px;\n"
 "color: rgb(255, 255, 255);")
         self.pushButton_6.setObjectName("pushButton_6")
+        self.textEdit = QtWidgets.QTextEdit(self.frame)
+        self.textEdit.setGeometry(QtCore.QRect(20, 70, 500, 450))
+        self.textEdit.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"padding: 10px")
+        self.textEdit.setReadOnly(True)
+        self.textEdit.setObjectName("textEdit")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Edit the test"))
         self.label.setText(_translate("Form", "<html><head/><body><p>Select an action to interact with the test</p></body></html>"))
         self.pushButton.setText(_translate("Form", "Add new question"))
         self.pushButton_2.setText(_translate("Form", "Edit existing question"))

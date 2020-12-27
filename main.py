@@ -143,7 +143,7 @@ class EditWindow(QtWidgets.QMainWindow):
 
         self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
         self.label_2.setText(self.title)
-        self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+        self.textEdit = self.findChild(QtWidgets.QTextEdit, 'textEdit')
 
         self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
         self.pushButton.clicked.connect(self.selectQstAdd)
@@ -165,7 +165,7 @@ class EditWindow(QtWidgets.QMainWindow):
         file = open('{}.txt'.format(self.title), 'r')
         with file:
             data = file.read()
-        self.label_3.setText(data)
+        self.textEdit.setText(data)
 
     def refresh(self):
         self.loadFile()

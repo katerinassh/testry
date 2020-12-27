@@ -9,5 +9,21 @@ Tim
 Lera
 2
 2 3 
-7
+7.0
+
+QstEnterText
+What are you from?
+word word word45
+5
+
+QstOneAnswer
+What is your favourite city?
+5
+Milan
+Kyiv
+Dnipro
+Toronto
+Madrid
+2
+6
 
