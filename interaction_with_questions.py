@@ -7,6 +7,7 @@ from addQstOneAnswer_design import Form_AddQstOneAnswer
 from addQstSomeAnswer_design import Form_AddQstSomeAnswer
 
 from edQstTF_design import Form_EdQstTF
+from edQstText_design import Form_EdQstText
 
 from edit_question_design import Form6
 from delete_question_design import Form7
@@ -325,11 +326,30 @@ class EditQuestion(QtWidgets.QMainWindow): # окно для выбора воп
     def select_qst_for_editing(self): # определеняет, какой вопрос нужно открыть для редактирования
         number = int(str(self.comboBox.currentText()).split(" - ")[0])
         type = self.current_test.questions[number].__doc__
+        self.qst = self.current_test.questions[number]
         if type == 'True/False':
-            self.qst = self.current_test.questions[number]
             self.wEdQstTF = EdQstTF(self.current_test, self.qst, number)
             self.wEdQstTF.show()
+        elif type == 'Text answer':
+            self.wEdQstText = EdQstText(self.current_test, self.qst, number)
+            self.wEdQstText.show()
+        elif type == 'With answer options':
+            self.wEdQstOneAnswer = EdQstOneAnswer(self.current_test, self.qst, number)
+            self.wEdQstOneAnswer.show()
+        elif type == 'Flags':
+            self.wEdQstSomeAnswer = EdQstSomeAnswer(self.current_test, self.qst, number)
+            self.wEdQstSomeAnswer.show()
+        #elif type == 'Linear Scale':
+            # self.wEdQstScale = EdQstScale(self.current_test, self.qst, number)
+            # self.wEdQstScale.show()
+        #elif type == 'Table with answer options':
+            # self.wEdTableOne = EdQstTableOne(self.current_test, self.qst, number)
+            # self.wEdQstTableOne.show()
+        #elif type == 'Grid of flags':
+            # self.wAddTable = AddQstTable(self.current_test, self.qst, number)
+            # self.wAddQstTable.show()
         self.hide()
+
 
 class EdQstTF(QtWidgets.QMainWindow): # окно для редактирование true/false question
     def __init__(self, test, qst, number):
@@ -369,6 +389,40 @@ class EdQstTF(QtWidgets.QMainWindow): # окно для редактирован
         self.current_test.questions.insert(self.number, self.qst)
         self.current_test.workTestFile()
         self.hide()
+
+
+class EdQstText(QtWidgets.QMainWindow): # окно для редактирование Text answer question
+    def __init__(self, test, qst, number):
+        super(EdQstText, self).__init__()
+        self.ui = Form_EdQstText()
+        self.ui.setupUi(self)
+
+        self.current_test = test
+        self.qst = qst
+        self.number = number
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.w)
+
+        self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
+        self.lineEdit.setText(self.qst._question)
+        self.lineEdit_2 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_2')
+        self.lineEdit_2.setText(str(self.qst.rating))
+        self.lineEdit_4 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_4')
+        self.lineEdit_4.setText(self.qst._right_answer)
+
+    def edit(self):  # пересмотр полей с параметрами
+        self.qst._question = self.lineEdit.text()
+        self.qst.rating = self.lineEdit_2.text()
+        self.qst._right_answer = self.lineEdit_4.text()
+
+    def w(self):  # удаление вопроса с теста, замена на отредактированый и запись в файл теста
+        self.edit()
+        self.current_test.questions.pop(self.number)
+        self.current_test.questions.insert(self.number, self.qst)
+        self.current_test.workTestFile()
+        self.hide()
+
 
 
 class DeleteQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для удаления

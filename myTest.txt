@@ -3,8 +3,8 @@ i want to test this program
 
 QstEnterText
 question44543
-something
-2.0
+new information
+1
 
 QstSomeAnswer
 new
