@@ -8,9 +8,9 @@ from delete_test_design import Form4
 from feedback_test_design import Form5
 from warning1_design import Warning1
 from warning2_design import Warning2
+from filter_design import Form7
 
 import interaction_with_questions
-import to_filter_data
 
 import test
 import feedback
@@ -179,9 +179,6 @@ class EditWindow(QtWidgets.QMainWindow):
 
         self.current_test.readFromFile(file)
 
-   # def upd_feedback(self):
-    #    self.feedback = feedback.Feedback(self.current_test.title, len(self.current_test.questions))
-
     def window1(self):
         self.w1 = MainWindow()
         self.w1.show()
@@ -213,61 +210,106 @@ class FeedbackWindow(QtWidgets.QMainWindow):
 
         self.title = title
         self.current_test = None
+        self.open()
+        self.feedback = feedback.Feedback(self.title, len(self.current_test.questions))
 
         self.label_2 = self.findChild(QtWidgets.QLabel, 'label_2')
         self.label_2.setText(self.title)
-        self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+        self.textEdit = self.findChild(QtWidgets.QTextEdit, 'textEdit')
+        self.textEdit_2 = self.findChild(QtWidgets.QTextEdit, 'textEdit_2')
+        self.textEdit_2.hide()
 
         self.pushButton_1 = self.findChild(QtWidgets.QPushButton, 'pushButton_1')
-        #self.pushButton_1.clicked.connect(self.selectSortName)
+        self.pushButton_1.clicked.connect(self.selectSortName)
         self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
-        #self.pushButton_2.clicked.connect(self.selectSortMark)
+        self.pushButton_2.clicked.connect(self.selectSortMark)
         self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
-        #self.pushButton_3.clicked.connect(self.selectFilter)
+        self.pushButton_3.clicked.connect(self.selectFilter)
         self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
-        #self.pushButton_4.clicked.connect(self.selectStatictics)
+        self.pushButton_4.clicked.connect(self.selectStatictics)
 
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window1)
-        self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')  #  кнопка збереження файлу, що відображається
-        #self.pushButton_6.clicked.connect()
+        self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')  #  кнопка збереження змін в основному файлі
+        # self.pushButton_6.clicked.connect(self.saveChanges)
+        self.pushButton_7 = self.findChild(QtWidgets.QPushButton, 'pushButton_7')
+        self.pushButton_7.clicked.connect(self.loadFile)
         self.loadFile()
-        #self.open()
-        #self.upd_feedback()
 
     def loadFile(self): # загружает на форму ответы из файла
         file = open('{}_answers.txt'.format(self.title), 'r')
         with file:
             data = file.read()
-        self.label_3.setText(data)
+        self.textEdit_2.hide()
+        self.textEdit.setText(data)
 
-    #     self.scrollArea = QtWidgets.QScrollArea(self)
-    #     self.scrollArea.setWidget(self.label_3)
-    #     self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-    #
-    #     self.scrollbar = QtWidgets.QScrollBar(Qt.Vertical, self)
-    #     self.scrollbar.setMaximum(self.scrollArea.verticalScrollBar().maximum())
-    #     self.scrollbar.valueChanged.connect(self.sync_func)
-    #
-    #     self.v_layout = QtWidgets.QVBoxLayout(self)
-    #     self.v_layout.addWidget(self.scrollArea)
-    #     self.v_layout.addWidget(self.scrollbar)
-    #
-    # def sync_func(self):
-    #     self.scroll_area.verticalScrollBar().setValue(self.scrollbar.value())
+    def saveChanges(self):
+        data = self.textEdit.text()
+        file = open('{}_answers.txt'.format(self.title), 'w')
+        file.writelines(data)
 
+    def open(self):  # открывает тест
+        file = open('{}.txt'.format(self.title), 'r')
+        title = file.readline().strip('\n')
+        description = file.readline().strip('\n')
+        _ = file.readline()
+        self.current_test = test.Test(title, description)
 
+        self.current_test.readFromFile(file)
 
+    def selectSortName(self):
+        self.feedback.sort_by_name()
+        file = open('{}_name-sorted.txt'.format(self.title), 'r')
+        with file:
+            data = file.read()
+        self.textEdit_2.show()
+        self.textEdit_2.setText(data)
 
-   # def open(self): # открывает тест
-    #    file = open('{}_answers.txt'.format(self.title), 'r')
-    #    title = file.readline().strip('\n')
-    #    _ = file.readline()
-     #   self.current_test = test.Test(title, description)
-        #self.current_test.readFromFile(file)
+    def selectSortMark(self):
+        self.feedback.sort_by_mark()
+        file = open('{}_mark-sorted.txt'.format(self.title), 'r')
+        with file:
+            data = file.read()
+        self.textEdit_2.show()
+        self.textEdit_2.setText(data)
 
-   # def upd_feedback(self):
-    #    self.feedback = feedback.Feedback(self.current_test.title, len(self.current_test.questions))
+    def selectStatictics(self):
+        max_mark = float(self.current_test.totalTestMark())
+        self.feedback.statistic_by_mark(max_mark)
+        file = open('{}_statistic.txt'.format(self.title), 'r')
+        with file:
+            data = file.read()
+        self.textEdit_2.show()
+        self.textEdit_2.setText(data)
+
+    def selectFilter(self):
+        self.wFilter = FilterWindow(self.title)
+        self.wFilter.show()
+
+        # name = self.wFilter.file_name()
+        # file = open('{}_{}.txt'.format(self.title, name), "r")
+        # with file:
+        #     data = file.read()
+        # self.textEdit_2.show()
+        # self.textEdit_2.setText(data)
+
+        # info = []
+        # info = FilterWindow.btn_pushed()
+        # mark = info[0]
+        # dir = info[1]
+
+        # mark = FilterWindow.mark
+        # dir = FilterWindow.limit_dir
+        #
+        # print(mark, dir)
+        # self.feedback.filter_by_mark(n, n)
+        #
+        # lim_name = self.limit_dir + str(self.mark)
+        # file = open('{}_{}.txt'.format(self.title, lim_name), 'r')
+        # with file:
+        #     data = file.read()
+        # self.textEdit_2.show()
+        # self.textEdit_2.setText(data)
 
     def window1(self):
         self.w1 = MainWindow()
@@ -278,25 +320,55 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.w4 = DeleteWindow(self.title)
         self.w4.show()
 
-    def selectselectSortName(self):
-        self.wSortN = ...
 
-    def selectFilter(self):
-        self.wFilter = to_filter_data.FilterByMark(self.ans_file)
-        self.wFilter.show()
+class FilterWindow(QtWidgets.QMainWindow):
+    def __init__(self, title):
+        super(FilterWindow, self).__init__()
+        self.ui = Form7()
+        self.ui.setupUi(self)
+
+        self.title = title
+        self.current_test = None
+        self.open()
+        self.feedback = feedback.Feedback(self.title, len(self.current_test.questions))
+
+        self.radioButton = self.findChild(QtWidgets.QRadioButton, 'radioButton')
+        self.radioButton_3 = self.findChild(QtWidgets.QRadioButton, 'radioButton_3')
+        self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.btn_pushed)
+
+    def btn_pushed(self):
+        limit_dir = 'more'
+        if self.radioButton.isChecked():
+            limit_dir = 'more'
+        elif self.radioButton_3.isChecked():
+            limit_dir = 'less'
+        mark = self.lineEdit.text()
+        self.hide()
+
+        self.feedback.filter_by_mark(mark, limit_dir)
+
+        lim_name = limit_dir + str(mark)
+        file = open('{}_{}.txt'.format(self.title, lim_name), "r")
+        with file:
+            data = file.read()
+        FeedbackWindow.textEdit_2.show()
+        FeedbackWindow.textEdit_2.setText(data)
+
+    def file_name(self):
+        return self.limit_dir + str(self.mark)
 
 
-    def selectQstAdd(self):
-        self.wAdd = interaction_with_questions.AddQuestion(self.title, self.current_test)
-        self.wAdd.show()
+    def open(self): # открывает тест
+        file = open('{}.txt'.format(self.title), 'r')
+        title = file.readline().strip('\n')
+        description = file.readline().strip('\n')
+        _ = file.readline()
+        self.current_test = test.Test(title, description)
 
-    def selectQstEdit(self):
-        self.wEdit = interaction_with_questions.EditQuestion(self.title, self.current_test)
-        self.wEdit.show()
+        self.current_test.readFromFile(file)
 
-    def selectQstDelete(self):
-        self.wDelete = interaction_with_questions.DeleteQuestion(self.title, self.current_test)
-        self.wDelete.show()
 
 
 class DeleteWindow(QtWidgets.QMainWindow):
