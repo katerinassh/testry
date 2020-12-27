@@ -1,11 +1,6 @@
 myTest
 i want to test this program
 
-QstEnterText
-question44543
-new information
-1
-
 QstSomeAnswer
 new
 4
@@ -17,8 +12,13 @@ choice4
 2 3 4 
 3.0
 
-QstTrueFalse
-questionFalse
-False
-10.0
+QstOneAnswer
+What is your favourite city?
+4
+Barcelona
+London
+Lviv
+Kyiv
+4
+1.0
 

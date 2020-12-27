@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'addQstOneAnswer_design.ui'
+# Form implementation generated from reading ui file 'designsUi/edQstOneAnswer_design.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -11,9 +11,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Form_AddQstOneAnswer(object):
+class Form_EdQstOneAnswer(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        Form.setObjectName("Editing question with one right answer")
         Form.resize(614, 413)
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(0, 0, 620, 420))
@@ -25,7 +25,7 @@ class Form_AddQstOneAnswer(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.label_2 = QtWidgets.QLabel(self.frame)
-        self.label_2.setGeometry(QtCore.QRect(10, 50, 191, 41))
+        self.label_2.setGeometry(QtCore.QRect(20, 50, 161, 41))
         self.label_2.setTextFormat(QtCore.Qt.RichText)
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
@@ -49,7 +49,7 @@ class Form_AddQstOneAnswer(object):
         self.label_3.setTextFormat(QtCore.Qt.RichText)
         self.label_3.setObjectName("label_3")
         self.label_5 = QtWidgets.QLabel(self.frame)
-        self.label_5.setGeometry(QtCore.QRect(20, 130, 171, 41))
+        self.label_5.setGeometry(QtCore.QRect(20, 130, 161, 41))
         self.label_5.setTextFormat(QtCore.Qt.RichText)
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
@@ -64,7 +64,7 @@ class Form_AddQstOneAnswer(object):
 "font: 10pt \"MS Shell Dlg 2\"; ")
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.label_6 = QtWidgets.QLabel(self.frame)
-        self.label_6.setGeometry(QtCore.QRect(10, 210, 401, 41))
+        self.label_6.setGeometry(QtCore.QRect(30, 210, 241, 41))
         self.label_6.setTextFormat(QtCore.Qt.RichText)
         self.label_6.setAlignment(QtCore.Qt.AlignCenter)
         self.label_6.setObjectName("label_6")
@@ -186,14 +186,14 @@ class Form_AddQstOneAnswer(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_2.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Enter the question:</span></p></body></html>"))
-        self.pushButton.setText(_translate("Form", "Add"))
-        self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:14pt;\">Adding a question with one right answer</span></p></body></html>"))
-        self.label_5.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Enter the valuation:</span></p></body></html>"))
+        Form.setWindowTitle(_translate("Form", "Editing question with one right answer"))
+        self.label_2.setText(_translate("Form", "<html><head/><body><p>Enter the question</p></body></html>"))
+        self.pushButton.setText(_translate("Form", "Confirm"))
+        self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:14pt;\">Editing a question with one right answer</span></p></body></html>"))
+        self.label_5.setText(_translate("Form", "<html><head/><body><p align=\"center\">Enter the valuation</p></body></html>"))
         self.lineEdit.setText(_translate("Form", "question"))
         self.lineEdit_2.setText(_translate("Form", "0"))
-        self.label_6.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt;\">Add some choices and choose right answer:</span></p></body></html>"))
+        self.label_6.setText(_translate("Form", "<html><head/><body><p align=\"center\">Edit choices and choose right answer</p></body></html>"))
         self.pushButton_2.setText(_translate("Form", "+"))
         self.lineEdit_3.setText(_translate("Form", "choice"))
         self.lineEdit_4.setText(_translate("Form", "choice"))
