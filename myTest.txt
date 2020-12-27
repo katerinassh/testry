@@ -1,24 +1,2 @@
 myTest
 i want to test this program
-
-QstSomeAnswer
-new
-4
-choice1
-choice2
-choice3
-choice4
-3
-2 3 4 
-3.0
-
-QstOneAnswer
-What is your favourite city?
-4
-Barcelona
-London
-Lviv
-Kyiv
-4
-1.0
-

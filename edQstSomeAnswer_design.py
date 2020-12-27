@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Form_EdQstSomeAnswer(object):
     def setupUi(self, Form):
-        Form.setObjectName("Editing question with some right answers")
+        Form.setObjectName("Editing flags question")
         Form.resize(614, 413)
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(0, 0, 620, 420))
@@ -181,7 +181,7 @@ class Form_EdQstSomeAnswer(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Editing question with some right answers"))
+        Form.setWindowTitle(_translate("Form", "Editing flags question"))
         self.label_2.setText(_translate("Form", "<html><head/><body><p>Enter the question</p></body></html>"))
         self.pushButton.setText(_translate("Form", "Confirm"))
         self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:14pt;\">Editing the question with multiple right answers</span></p></body></html>"))
@@ -192,8 +192,8 @@ class Form_EdQstSomeAnswer(object):
         self.pushButton_2.setText(_translate("Form", "+"))
         self.lineEdit_3.setText(_translate("Form", "choice"))
         self.lineEdit_4.setText(_translate("Form", "choice"))
-        self.lineEdit_5.setText(_translate("Form", "choice"))
-        self.lineEdit_6.setText(_translate("Form", "choice"))
-        self.lineEdit_7.setText(_translate("Form", "choice"))
+        self.lineEdit_5.setText(_translate("Form", ""))
+        self.lineEdit_6.setText(_translate("Form", ""))
+        self.lineEdit_7.setText(_translate("Form", ""))
         self.pushButton_3.setText(_translate("Form", "+"))
         self.pushButton_4.setText(_translate("Form", "+"))

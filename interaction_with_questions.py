@@ -282,15 +282,15 @@ class AddQstSomeAnswer(QtWidgets.QMainWindow):
         self.qst.setRating(self.lineEdit_2.text())
         self.qst.rating = self.lineEdit_2.text()
 
-        if self.lineEdit_3.text() != 'choice':
+        if self.lineEdit_3.text() != '':
             self.qst._answerOptions.append(self.lineEdit_3.text())
-        if self.lineEdit_4.text() != 'choice':
+        if self.lineEdit_4.text() != '':
             self.qst._answerOptions.append(self.lineEdit_4.text())
-        if self.lineEdit_5.text() != 'choice':
+        if self.lineEdit_5.text() != '':
             self.qst._answerOptions.append(self.lineEdit_5.text())
-        if self.lineEdit_6.text() != 'choice':
+        if self.lineEdit_6.text() != '':
             self.qst._answerOptions.append(self.lineEdit_6.text())
-        if self.lineEdit_7.text() != 'choice':
+        if self.lineEdit_7.text() != '':
             self.qst._answerOptions.append(self.lineEdit_7.text())
 
         if self.checkBox.isChecked():
@@ -543,6 +543,134 @@ class EdQstOneAnswer(QtWidgets.QMainWindow): # окно для редактир�
         self.radioButton_5.show()
         self.lineEdit_7.show()
         self.qst.numOptions = 5
+
+    def w(self):  # удаление вопроса с теста, замена на отредактированый и запись в файл теста
+        self.edit()
+        self.current_test.questions.pop(self.number)
+        self.current_test.questions.insert(self.number, self.qst)
+        self.current_test.workTestFile()
+        self.hide()
+
+
+class EdQstSomeAnswer(QtWidgets.QMainWindow): # окно для редактирование question with options
+    def __init__(self, test, qst, number):
+        super(EdQstSomeAnswer, self).__init__()
+        self.ui = Form_EdQstSomeAnswer()
+        self.ui.setupUi(self)
+
+        self.current_test = test
+        self.qst = qst
+        self.number = number
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.w)
+
+        self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
+        self.lineEdit.setText(self.qst._question)
+        self.lineEdit_2 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_2')
+        self.lineEdit_2.setText(str(self.qst.rating))
+
+        self.checkBox = self.findChild(QtWidgets.QCheckBox, 'checkBox')
+        self.checkBox_2 = self.findChild(QtWidgets.QCheckBox, 'checkBox_2')
+        self.checkBox_3 = self.findChild(QtWidgets.QCheckBox, 'checkBox_3')
+        self.checkBox_4 = self.findChild(QtWidgets.QCheckBox, 'checkBox_4')
+        self.checkBox_5 = self.findChild(QtWidgets.QCheckBox, 'checkBox_5')
+        self.lineEdit_3 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_3')
+        self.lineEdit_3.setText(self.qst._answerOptions[0])
+        self.lineEdit_4 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_4')
+        self.lineEdit_4.setText(self.qst._answerOptions[1])
+        self.lineEdit_5 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_5')
+        self.lineEdit_6 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_6')
+        self.lineEdit_7 = self.findChild(QtWidgets.QLineEdit, 'lineEdit_7')
+        self.checkBox_3.hide()
+        self.checkBox_4.hide()
+        self.checkBox_5.hide()
+        self.lineEdit_5.hide()
+        self.lineEdit_6.hide()
+        self.lineEdit_7.hide()
+
+        self.pushButton_2 = self.findChild(QtWidgets.QPushButton, 'pushButton_2')
+        self.pushButton_2.clicked.connect(self.display_3)
+        self.pushButton_3 = self.findChild(QtWidgets.QPushButton, 'pushButton_3')
+        self.pushButton_3.clicked.connect(self.display_4)
+        self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
+        self.pushButton_4.clicked.connect(self.display_5)
+
+        if (self.qst.numOptions >= 3):
+            self.lineEdit_5.setText(self.qst._answerOptions[2])
+            self.checkBox_3.show()
+            self.lineEdit_5.show()
+            self.pushButton_2.hide()
+        if (self.qst.numOptions >= 4):
+            self.lineEdit_6.setText(self.qst._answerOptions[3])
+            self.checkBox_4.show()
+            self.lineEdit_6.show()
+            self.pushButton_3.hide()
+        if (self.qst.numOptions == 5):
+            self.checkBox_5.show()
+            self.lineEdit_7.show()
+            self.pushButton_4.hide()
+
+        if '1' in self.qst._rightAnswerIndexArr:
+            self.checkBox.setChecked(True)
+        if '2' in self.qst._rightAnswerIndexArr:
+            self.checkBox_2.setChecked(True)
+        if '3' in self.qst._rightAnswerIndexArr:
+            self.checkBox_3.setChecked(True)
+        if '4' in self.qst._rightAnswerIndexArr:
+            self.checkBox_4.setChecked(True)
+        if '5' in self.qst._rightAnswerIndexArr:
+            self.checkBox_5.setChecked(True)
+
+    def display_3(self): # отображение 3 опций
+        self.pushButton_2.hide()
+        self.checkBox_3.show()
+        self.lineEdit_5.show()
+        self.qst.numOptions = 3
+
+    def display_4(self): # отображение 4 опций
+        self.pushButton_3.hide()
+        self.checkBox_4.show()
+        self.lineEdit_6.show()
+        self.qst.numOptions = 4
+
+    def display_5(self): # отображение 5 опций
+        self.pushButton_4.hide()
+        self.checkBox_5.show()
+        self.lineEdit_7.show()
+        self.qst.numOptions = 5
+
+    def edit(self): # пересмотр полей с параметрами
+        self.qst._question = self.lineEdit.text()
+        self.qst.rating = self.lineEdit_2.text()
+        self.qst._answerOptions = [] * self.qst.numOptions
+        self.qst._rightAnswerIndexArr = [] * self.qst.numOptions
+        if self.qst.numOptions >= 1:
+            if self.lineEdit_3.text() != '':
+                self.qst._answerOptions.append(self.lineEdit_3.text())
+        if self.qst.numOptions >= 2:
+            if self.lineEdit_4.text() != '':
+                self.qst._answerOptions.append(self.lineEdit_4.text())
+        if self.qst.numOptions >= 3:
+            if self.lineEdit_5.text() != '':
+                self.qst._answerOptions.append(self.lineEdit_5.text())
+        if self.qst.numOptions >= 4:
+            if self.lineEdit_6.text() != '':
+                self.qst._answerOptions.append(self.lineEdit_6.text())
+        if self.qst.numOptions == 5:
+            if self.lineEdit_7.text() != '':
+                self.qst._answerOptions.append(self.lineEdit_7.text())
+
+        if self.checkBox.isChecked():
+            self.qst._rightAnswerIndexArr.append('1')
+        if self.checkBox_2.isChecked():
+            self.qst._rightAnswerIndexArr.append('2')
+        if self.checkBox_3.isChecked():
+            self.qst._rightAnswerIndexArr.append('3')
+        if self.checkBox_4.isChecked():
+            self.qst._rightAnswerIndexArr.append('4')
+        if self.checkBox_5.isChecked():
+            self.qst._rightAnswerIndexArr.append('5')
 
     def w(self):  # удаление вопроса с теста, замена на отредактированый и запись в файл теста
         self.edit()
