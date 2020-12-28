@@ -5,6 +5,7 @@ from addQstText_design import Form_AddQstText
 from addQstTF_design import Form_AddQstTF
 from addQstOneAnswer_design import Form_AddQstOneAnswer
 from addQstSomeAnswer_design import Form_AddQstSomeAnswer
+from addQstScale_design import Form_AddQstScale
 
 from edQstTF_design import Form_EdQstTF
 from edQstText_design import Form_EdQstText
@@ -49,8 +50,8 @@ class AddQuestion(QtWidgets.QMainWindow): #окно для выбора типа
             self.wAddQstSomeAnswer.show()
         elif str(self.comboBox.currentText()) == 'Linear Scale':
             self.qst = types_of_questions.QstScale()
-            #self.wAddQstScale = AddQstScale(self.current_test, self.qst)
-            #self.wAddQstScale.show()
+            self.wAddQstScale = AddQstScale(self.current_test, self.qst)
+            self.wAddQstScale.show()
         elif str(self.comboBox.currentText()) == 'Table with answer options':
             self.qst = types_of_questions.QstTableOne()
             #self.wAddTableOne = AddQstTableOne(self.current_test, self.qst)
@@ -310,6 +311,43 @@ class AddQstSomeAnswer(QtWidgets.QMainWindow):
         self.current_test.workTestFile()
         self.hide()
 
+class AddQstScale(QtWidgets.QMainWindow):
+    def __init__(self, test, qst):
+        super(AddQstScale, self).__init__()
+        self.ui = Form_AddQstScale()
+        self.ui.setupUi(self)
+
+        self.current_test = test
+        self.qst = qst
+
+        self.pushButton = self.findChild(QtWidgets.QPushButton, 'pushButton')
+        self.pushButton.clicked.connect(self.w)
+
+        self.doubleSpinBox = self.findChild(QtWidgets.QDoubleSpinBox, 'changeSpinBox')
+        self.doubleSpinBox.ValueChenged.connext(self.moveSpinBox)
+
+        self.scrollBar = self.findChild()
+        self.scrollBar.SliderMoved.connect(self.moveSlider)
+
+    def moveSlider(self):
+        self.doubleSpinBox.SetValue(self.scrollBar.value)
+
+    def moveSpinBox(self):
+        self.scrollBar.value = self.doubleSpinBox.value
+
+    def add(self):
+        self.lineEdit = self.fineChild(QtWidgets.QLineEdit, 'lineEdit')
+        self.qst._question = self.lineEdit.text
+        self.lineEdit_2 = self.fineChild(QtWidgets.QLineEdit, 'lineEdit_2')
+        self.qst.setRating(self.lineEdit_2.text())
+        self.doubleSpinBox = self.findChild(QtWidgets.QDoubleSpinBox, 'doubleSpinBox')
+        self.qst_right_answer = float(self.doubleSpinBox.value)
+
+    def w(self):
+        self.add()
+        self.current_test.questions.append(self.qst)
+        self.current_test.workTestFile()
+        self.hide()
 
 class EditQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для редактирования
     def __init__(self, test):
@@ -341,9 +379,9 @@ class EditQuestion(QtWidgets.QMainWindow): # окно для выбора воп
         elif type == 'Flags':
             self.wEdQstSomeAnswer = EdQstSomeAnswer(self.current_test, self.qst, number)
             self.wEdQstSomeAnswer.show()
-        #elif type == 'Linear Scale':
-            # self.wEdQstScale = EdQstScale(self.current_test, self.qst, number)
-            # self.wEdQstScale.show()
+        elif type == 'Linear Scale':
+            self.wEdQstScale = EdQstScale(self.current_test, self.qst, number)
+            self.wEdQstScale.show()
         #elif type == 'Table with answer options':
             # self.wEdTableOne = EdQstTableOne(self.current_test, self.qst, number)
             # self.wEdQstTableOne.show()
