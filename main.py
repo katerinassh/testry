@@ -289,6 +289,12 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.wFilter = FilterWindow(self.title)
         self.wFilter.show()
 
+    def filt_show(self, data):
+        self.textEdit.hide()
+        self.textEdit_2.show()
+        print(data)
+        self.textEdit_2.setText(data)
+
     def window1(self):
         self.w1 = MainWindow()
         self.w1.show()
@@ -328,15 +334,7 @@ class FilterWindow(QtWidgets.QMainWindow):
         self.feedback.filter_by_mark(mark, limit_dir)
 
         lim_name = limit_dir + str(mark)
-        # file = open('{}_{}.txt'.format(self.title, lim_name), "r")
-        # with file:
-        #     data = file.read()
         self.wFeedback(lim_name)
-        # FeedbackWindow.textEdit_2.show()
-        # FeedbackWindow.textEdit_2.setText(data)
-
-    def file_name(self):
-        return self.limit_dir + str(self.mark)
 
     def open(self): # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
@@ -344,7 +342,6 @@ class FilterWindow(QtWidgets.QMainWindow):
         description = file.readline().strip('\n')
         _ = file.readline()
         self.current_test = test.Test(title, description)
-
         self.current_test.readFromFile(file)
 
     def wFeedback(self, lim_name):
@@ -352,10 +349,9 @@ class FilterWindow(QtWidgets.QMainWindow):
         file = open('{}_{}.txt'.format(self.title, lim_name), "r")
         with file:
             data = file.read()
-        wFeed.textEdit.hide()
-        wFeed.textEdit_2.setText(data)
-        wFeed.textEdit_2.show()
-        self.hide()
+        wFeed.filt_show(data)
+
+        # self.hide()
 
 class DeleteWindow(QtWidgets.QMainWindow):
     def __init__(self, title):
