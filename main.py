@@ -231,7 +231,7 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window1)
         self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')  #  кнопка збереження змін в основному файлі
-        # self.pushButton_6.clicked.connect(self.saveChanges)
+        self.pushButton_6.clicked.connect(self.saveChanges)
         self.pushButton_7 = self.findChild(QtWidgets.QPushButton, 'pushButton_7')
         self.pushButton_7.clicked.connect(self.loadFile)
         self.loadFile()
@@ -240,13 +240,16 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         file = open('{}_answers.txt'.format(self.title), 'r')
         with file:
             data = file.read()
+            file.close()
         self.textEdit_2.hide()
         self.textEdit.setText(data)
 
     def saveChanges(self):
-        data = self.textEdit.text()
+        data = self.textEdit.toPlainText()
         file = open('{}_answers.txt'.format(self.title), 'w')
-        file.writelines(data)
+        with file:
+            file.write(data)
+            file.close()
 
     def open(self):  # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
@@ -285,31 +288,6 @@ class FeedbackWindow(QtWidgets.QMainWindow):
     def selectFilter(self):
         self.wFilter = FilterWindow(self.title)
         self.wFilter.show()
-
-        # name = self.wFilter.file_name()
-        # file = open('{}_{}.txt'.format(self.title, name), "r")
-        # with file:
-        #     data = file.read()
-        # self.textEdit_2.show()
-        # self.textEdit_2.setText(data)
-
-        # info = []
-        # info = FilterWindow.btn_pushed()
-        # mark = info[0]
-        # dir = info[1]
-
-        # mark = FilterWindow.mark
-        # dir = FilterWindow.limit_dir
-        #
-        # print(mark, dir)
-        # self.feedback.filter_by_mark(n, n)
-        #
-        # lim_name = self.limit_dir + str(self.mark)
-        # file = open('{}_{}.txt'.format(self.title, lim_name), 'r')
-        # with file:
-        #     data = file.read()
-        # self.textEdit_2.show()
-        # self.textEdit_2.setText(data)
 
     def window1(self):
         self.w1 = MainWindow()
@@ -350,15 +328,15 @@ class FilterWindow(QtWidgets.QMainWindow):
         self.feedback.filter_by_mark(mark, limit_dir)
 
         lim_name = limit_dir + str(mark)
-        file = open('{}_{}.txt'.format(self.title, lim_name), "r")
-        with file:
-            data = file.read()
-        FeedbackWindow.textEdit_2.show()
-        FeedbackWindow.textEdit_2.setText(data)
+        # file = open('{}_{}.txt'.format(self.title, lim_name), "r")
+        # with file:
+        #     data = file.read()
+        self.wFeedback(lim_name)
+        # FeedbackWindow.textEdit_2.show()
+        # FeedbackWindow.textEdit_2.setText(data)
 
     def file_name(self):
         return self.limit_dir + str(self.mark)
-
 
     def open(self): # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
@@ -369,7 +347,15 @@ class FilterWindow(QtWidgets.QMainWindow):
 
         self.current_test.readFromFile(file)
 
-
+    def wFeedback(self, lim_name):
+        wFeed = FeedbackWindow(self.title)
+        file = open('{}_{}.txt'.format(self.title, lim_name), "r")
+        with file:
+            data = file.read()
+        wFeed.textEdit.hide()
+        wFeed.textEdit_2.setText(data)
+        wFeed.textEdit_2.show()
+        self.hide()
 
 class DeleteWindow(QtWidgets.QMainWindow):
     def __init__(self, title):
