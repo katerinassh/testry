@@ -14,7 +14,7 @@ Lera
 QstEnterText
 What are you from?
 word word word45
-5
+5.0
 
 QstOneAnswer
 What is your favourite city?
@@ -25,5 +25,5 @@ Dnipro
 Toronto
 Madrid
 2
-6
+6.0
 

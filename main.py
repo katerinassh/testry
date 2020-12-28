@@ -231,7 +231,7 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window1)
         self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')  #  кнопка збереження змін в основному файлі
-        # self.pushButton_6.clicked.connect(self.saveChanges)
+        self.pushButton_6.clicked.connect(self.saveChanges)
         self.pushButton_7 = self.findChild(QtWidgets.QPushButton, 'pushButton_7')
         self.pushButton_7.clicked.connect(self.loadFile)
         self.loadFile()
@@ -240,13 +240,18 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         file = open('{}_answers.txt'.format(self.title), 'r')
         with file:
             data = file.read()
+            file.close()
         self.textEdit_2.hide()
         self.textEdit.setText(data)
 
     def saveChanges(self):
         data = self.textEdit.text()
-        file = open('{}_answers.txt'.format(self.title), 'w')
-        file.writelines(data)
+        print(data)
+        # file = open('{}_answers.txt'.format(self.title), 'w')
+        # with file:
+        #     file.write(data)
+        #     file.close()
+        # self.loadFile()
 
     def open(self):  # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
