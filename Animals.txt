@@ -1,0 +1,39 @@
+Animals
+Discover how much do you know about animals.
+
+QstTrueFalse
+Whale is a fish.
+False
+4.0
+
+QstOneAnswer
+Choose the fastest animal on the planet.
+4
+horse
+ostrich emu
+cheetah
+panter
+3
+5
+
+QstEnterText
+Enter an animal, who has more than one heart.
+octopus
+8
+
+QstSomeAnswer
+Choose birds.
+4
+forty
+titmouse
+cricket
+parrot
+3
+1 2 4 
+10
+
+QstTrueFalse
+We are animals
+True
+0.0
+
