@@ -228,6 +228,17 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
         self.pushButton_4.clicked.connect(self.selectStatictics)
 
+        self.radioButton = self.findChild(QtWidgets.QRadioButton, 'radioButton')
+        self.radioButton.hide()
+        self.radioButton_2 = self.findChild(QtWidgets.QRadioButton, 'radioButton_2')
+        self.radioButton_2.hide()
+        self.label_3 = self.findChild(QtWidgets.QLabel, 'label_3')
+        self.label_3.hide()
+        self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
+        self.lineEdit.hide()
+        self.pushButton_8 = self.findChild(QtWidgets.QPushButton, 'pushButton_8')
+        self.pushButton_8.hide()
+
         self.pushButton_5 = self.findChild(QtWidgets.QPushButton, 'pushButton_5')
         self.pushButton_5.clicked.connect(self.window1)
         self.pushButton_6 = self.findChild(QtWidgets.QPushButton, 'pushButton_6')  #  кнопка збереження змін в основному файлі
@@ -286,14 +297,47 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.textEdit_2.setText(data)
 
     def selectFilter(self):
-        self.wFilter = FilterWindow(self.title)
-        self.wFilter.show()
+        self.radioButton.show()
+        self.radioButton_2.show()
+        self.label_3.show()
+        self.lineEdit.show()
+        self.pushButton_8.show()
 
-    def filt_show(self, data):
-        self.textEdit.hide()
+        self.pushButton_8.clicked.connect(self.resFilter)
+
+    def resFilter(self):
+        limit_dir = 'more'
+        if self.radioButton.isChecked():
+            limit_dir = 'more'
+        elif self.radioButton_3.isChecked():
+            limit_dir = 'less'
+        mark = self.lineEdit.text()
+
+        self.feedback.filter_by_mark(mark, limit_dir)
+        lim_name = limit_dir + str(mark)
+
+        file = open('{}_{}.txt'.format(self.title, lim_name), "r")
+        with file:
+            data = file.read()
         self.textEdit_2.show()
-        print(data)
         self.textEdit_2.setText(data)
+
+        self.radioButton.hide()
+        self.radioButton_2.hide()
+        self.label_3.hide()
+        self.lineEdit.hide()
+        self.pushButton_8.hide()
+
+
+    # def selectFilter(self):
+    #     self.wFilter = FilterWindow(self.title)
+    #     self.wFilter.show()
+
+    # def filt_show(self, data):
+    #     self.textEdit.hide()
+    #     # self.textEdit_2.show()
+    #     print(data)
+    #     self.textEdit_2.setText(data)
 
     def window1(self):
         self.w1 = MainWindow()
@@ -351,7 +395,6 @@ class FilterWindow(QtWidgets.QMainWindow):
             data = file.read()
         wFeed.filt_show(data)
 
-        # self.hide()
 
 class DeleteWindow(QtWidgets.QMainWindow):
     def __init__(self, title):
