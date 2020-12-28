@@ -339,7 +339,7 @@ class FilterWindow(QtWidgets.QMainWindow):
         self.radioButton_3 = self.findChild(QtWidgets.QRadioButton, 'radioButton_3')
         self.lineEdit = self.findChild(QtWidgets.QLineEdit, 'lineEdit')
         self.pushButton_4 = self.findChild(QtWidgets.QPushButton, 'pushButton_4')
-        self.pushButton_4.clicked.connect(self.btn_pushed)
+        self.pushButton_4.clicked.connect(self.btn_pushed, FeedbackWindow)
 
     def btn_pushed(self):
         limit_dir = 'more'
@@ -353,15 +353,15 @@ class FilterWindow(QtWidgets.QMainWindow):
         self.feedback.filter_by_mark(mark, limit_dir)
 
         lim_name = limit_dir + str(mark)
-        file = open('{}_{}.txt'.format(self.title, lim_name), "r")
-        with file:
-            data = file.read()
-        FeedbackWindow.textEdit_2.show()
-        FeedbackWindow.textEdit_2.setText(data)
+        # file = open('{}_{}.txt'.format(self.title, lim_name), "r")
+        # with file:
+        #     data = file.read()
+        self.wFeedback(lim_name)
+        # FeedbackWindow.textEdit_2.show()
+        # FeedbackWindow.textEdit_2.setText(data)
 
     def file_name(self):
         return self.limit_dir + str(self.mark)
-
 
     def open(self): # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
@@ -372,7 +372,14 @@ class FilterWindow(QtWidgets.QMainWindow):
 
         self.current_test.readFromFile(file)
 
-
+    def wFeedback(self, lim_name):
+        wFeed = FeedbackWindow(self.title)
+        file = open('{}_{}.txt'.format(self.title, lim_name), "r")
+        with file:
+            data = file.read()
+        wFeed.textEdit_2.show()
+        wFeed.textEdit_2.setText(data)
+        self.hide()
 
 class DeleteWindow(QtWidgets.QMainWindow):
     def __init__(self, title):

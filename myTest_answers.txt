@@ -1,6 +1,6 @@
 myTest
 
-Vanya
+Kate
 1
 2 3
 7.0
@@ -13,7 +13,7 @@ Kyiv
 
 18.0
 
-Ilya
+Sally
 1
 2 3
 7.0
@@ -52,7 +52,7 @@ Kyiv
 
 11.0
 
-Ilya
+Fill
 1
 2 3
 7.0
