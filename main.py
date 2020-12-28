@@ -261,6 +261,7 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         with file:
             file.write(data)
             file.close()
+        self.feedback = feedback.Feedback(self.title, len(self.current_test.questions))
 
     def open(self):  # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
@@ -309,7 +310,7 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         limit_dir = 'more'
         if self.radioButton.isChecked():
             limit_dir = 'more'
-        elif self.radioButton_3.isChecked():
+        elif self.radioButton_2.isChecked():
             limit_dir = 'less'
         mark = self.lineEdit.text()
 

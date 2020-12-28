@@ -48,7 +48,7 @@ word word word45
 5.0
 3
 Kyiv
-6.0
+3.0
 
 11.0
 
