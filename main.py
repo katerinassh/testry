@@ -245,13 +245,11 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.textEdit.setText(data)
 
     def saveChanges(self):
-        data = self.textEdit.text()
-        print(data)
-        # file = open('{}_answers.txt'.format(self.title), 'w')
-        # with file:
-        #     file.write(data)
-        #     file.close()
-        # self.loadFile()
+        data = self.textEdit.toPlainText()
+        file = open('{}_answers.txt'.format(self.title), 'w')
+        with file:
+            file.write(data)
+            file.close()
 
     def open(self):  # открывает тест
         file = open('{}.txt'.format(self.title), 'r')
