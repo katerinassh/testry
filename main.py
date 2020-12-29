@@ -85,8 +85,8 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
 
     def window5(self): # показывает окно для получения результатов теста
         self.w5 = FeedbackWindow(self.lineEdit.text())
-        if FileNotFoundError:
-            self.warning2()
+       # if FileNotFoundError:
+        #    self.warning2()
         self.w5.show()
         self.hide()
 
