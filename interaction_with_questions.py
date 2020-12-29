@@ -5,7 +5,7 @@ from addQstText_design import Form_AddQstText
 from addQstTF_design import Form_AddQstTF
 from addQstOneAnswer_design import Form_AddQstOneAnswer
 from addQstSomeAnswer_design import Form_AddQstSomeAnswer
-from addQstScale_design import Form_AddQstScale
+#from addQstScale_design import Form_AddQstScale
 
 from edQstTF_design import Form_EdQstTF
 from edQstText_design import Form_EdQstText
@@ -50,8 +50,8 @@ class AddQuestion(QtWidgets.QMainWindow): #окно для выбора типа
             self.wAddQstSomeAnswer.show()
         elif str(self.comboBox.currentText()) == 'Linear Scale':
             self.qst = types_of_questions.QstScale()
-            self.wAddQstScale = AddQstScale(self.current_test, self.qst)
-            self.wAddQstScale.show()
+            #self.wAddQstScale = AddQstScale(self.current_test, self.qst)
+            #self.wAddQstScale.show()
         elif str(self.comboBox.currentText()) == 'Table with answer options':
             self.qst = types_of_questions.QstTableOne()
             #self.wAddTableOne = AddQstTableOne(self.current_test, self.qst)
@@ -311,7 +311,8 @@ class AddQstSomeAnswer(QtWidgets.QMainWindow):
         self.current_test.workTestFile()
         self.hide()
 
-class AddQstScale(QtWidgets.QMainWindow):
+
+'''class AddQstScale(QtWidgets.QMainWindow):
     def __init__(self, test, qst):
         super(AddQstScale, self).__init__()
         self.ui = Form_AddQstScale()
@@ -347,7 +348,7 @@ class AddQstScale(QtWidgets.QMainWindow):
         self.add()
         self.current_test.questions.append(self.qst)
         self.current_test.workTestFile()
-        self.hide()
+        self.hide()'''
 
 class EditQuestion(QtWidgets.QMainWindow): # окно для выбора вопроса для редактирования
     def __init__(self, test):
@@ -379,9 +380,9 @@ class EditQuestion(QtWidgets.QMainWindow): # окно для выбора воп
         elif type == 'Flags':
             self.wEdQstSomeAnswer = EdQstSomeAnswer(self.current_test, self.qst, number)
             self.wEdQstSomeAnswer.show()
-        elif type == 'Linear Scale':
-            self.wEdQstScale = EdQstScale(self.current_test, self.qst, number)
-            self.wEdQstScale.show()
+        #elif type == 'Linear Scale':
+            #self.wEdQstScale = EdQstScale(self.current_test, self.qst, number)
+            #self.wEdQstScale.show()
         #elif type == 'Table with answer options':
             # self.wEdTableOne = EdQstTableOne(self.current_test, self.qst, number)
             # self.wEdQstTableOne.show()

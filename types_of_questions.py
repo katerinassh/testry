@@ -32,6 +32,9 @@ class Qst:  # Fabric
         self.user_answer = input()
         self.userMark()
 
+    def get_question(self):
+        return self._question
+
 
 class QstTrueFalse(Qst):  # клас для виду запитань із двома варіантами відповіді правда/брехня
     """True/False"""
@@ -48,6 +51,7 @@ class QstTrueFalse(Qst):  # клас для виду запитань із дв�
         for i in self._answerOptions:
             options += i + '\n'
         print(str(self._question) + '\n' + options)
+
 
     def add(self):
         print('Input question')
@@ -103,6 +107,9 @@ class QstOneAnswer(Qst):  # запитання з вибором однієї п
 
     def enterOption(self, option):
         self._answerOptions.append(option)
+
+    def get_options(self, i):
+        return self._answerOptions[i]
 
     def add(self):
         print('Input question')
