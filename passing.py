@@ -125,7 +125,3 @@ class w_QstOneAnswer(QtWidgets.QMainWindow):
                 self.qst.user_answer = str(i-1)
                 break
         self.ui.hide()
-
-
-qst = types_of_questions.QstTrueFalse()
-qst.add()
