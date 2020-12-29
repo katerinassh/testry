@@ -131,6 +131,9 @@ color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Option 2</string>
     </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QRadioButton" name="radioButton_3">
     <property name="font">
