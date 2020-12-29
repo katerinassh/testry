@@ -72,15 +72,15 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
 
     def window3(self): # показывает окно для редактирования теста
         self.w3 = EditWindow(self.lineEdit.text())
-        if FileNotFoundError:
-            self.warning2()
+        #if FileNotFoundError:
+         #   self.warning2()
         self.w3.show()
         self.hide()
 
     def window4(self): # показывает окно для удаления теста
         self.w4 = DeleteWindow(self.lineEdit.text())
-        if FileNotFoundError:
-            self.warning2()
+       # if FileNotFoundError:
+        #    self.warning2()
         self.w4.show()
 
     def window5(self): # показывает окно для получения результатов теста
@@ -94,9 +94,9 @@ class MainWindow(QtWidgets.QMainWindow): # главный экран прогр�
         self.war = WarningWindow1()
         self.war.show()
 
-    def warning2(self): # показывает окно с предупреждением о том, что такого теста не существует
-        self.war = WarningWindow2()
-        self.war.show()
+    #def warning2(self): # показывает окно с предупреждением о том, что такого теста не существует
+     #   self.war = WarningWindow2()
+     #  self.war.show()
 
 
 class CreateWindow(QtWidgets.QMainWindow):
@@ -328,17 +328,6 @@ class FeedbackWindow(QtWidgets.QMainWindow):
         self.label_3.hide()
         self.lineEdit.hide()
         self.pushButton_8.hide()
-
-
-    # def selectFilter(self):
-    #     self.wFilter = FilterWindow(self.title)
-    #     self.wFilter.show()
-
-    # def filt_show(self, data):
-    #     self.textEdit.hide()
-    #     # self.textEdit_2.show()
-    #     print(data)
-    #     self.textEdit_2.setText(data)
 
     def window1(self):
         self.w1 = MainWindow()

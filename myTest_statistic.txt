@@ -1,3 +1,0 @@
-Average mark: 9.2 from 18.0
-Average success rate in percent: 51.111%
-Number of excellent tests: 1 from 5
